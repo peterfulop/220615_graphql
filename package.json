@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "apollo": "ts-node-dev index.ts"
+    "apollo": "ts-node-dev apollo.ts"
   },
   "keywords": [],
   "author": "",
