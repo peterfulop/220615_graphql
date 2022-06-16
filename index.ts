@@ -1,15 +1,19 @@
 import { ApolloServer, gql } from 'apollo-server';
 import { makeExecutableSchema } from 'graphql-tools';
+import { products } from './data/data';
+import { ApolloContext, QueryProductArgs } from './types';
 
 const productTypeDef = gql`
   type Query {
     products: [Product!]!
+    product(id: ID!): Product
   }
 
   type Product {
     name: String!
     description: String!
     quantity: Int!
+    image: String!
     price: Float!
     onSale: Boolean!
   }
@@ -18,15 +22,19 @@ const productTypeDef = gql`
 const productGQLModule = {
   Query: {
     products: () => {
-      return [
-        {
-          name: 'Bike',
-          description: 'Mountain Bike',
-          quantity: 20,
-          price: 999.99,
-          onSale: true,
-        },
-      ];
+      return products;
+    },
+    product: (
+      _parent: any,
+      args: QueryProductArgs,
+      _context: ApolloContext
+    ) => {
+      const productId = args.id;
+      const product = products.find((product) => {
+        return product.id === productId;
+      });
+      if (!product) return null;
+      return product;
     },
   },
 };
