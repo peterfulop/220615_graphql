@@ -3,6 +3,8 @@ import {
   QueryProductParents,
   QueryCategoryArgs,
   QueryReviewParents,
+  Category,
+  Review,
 } from '../../../types';
 
 export const Product = {
@@ -12,7 +14,7 @@ export const Product = {
     context: ApolloContext
   ) => {
     const { categoryId } = parent;
-    return context.categories.find((category) => {
+    return context.categories.find((category: Category) => {
       return category.id === categoryId;
     });
   },
@@ -22,7 +24,7 @@ export const Product = {
     context: ApolloContext
   ) => {
     const { id } = parent;
-    return context.reviews.filter((review) => {
+    return context.reviews.filter((review: Review) => {
       return review.productId === id;
     });
   },

@@ -2,7 +2,7 @@ import { gql } from 'apollo-server';
 
 export const productTypeDef = gql`
   type Query {
-    products: [Product!]!
+    products(filter: ProductsFilterInput): [Product!]!
     product(id: ID!): Product
     categories: [Category!]!
     category(id: ID!): Category
@@ -23,7 +23,7 @@ export const productTypeDef = gql`
   type Category {
     id: ID!
     name: String!
-    products: [Product!]!
+    products(filter: ProductsFilterInput): [Product!]!
   }
 
   type Review {
@@ -32,5 +32,10 @@ export const productTypeDef = gql`
     title: String!
     comment: String!
     rating: Int!
+  }
+
+  input ProductsFilterInput {
+    onSale: Boolean
+    avgRating: Int
   }
 `;

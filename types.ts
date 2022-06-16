@@ -32,12 +32,19 @@ export type Scalars = {
   Float: number;
 };
 
+export type FilterProductArgs = {
+  onSale: boolean;
+  avgRating: number;
+};
+
 export type QueryProductArgs = {
   id: Scalars['ID'];
+  filter: FilterProductArgs;
 };
 
 export type QueryCategoryArgs = {
   id: Scalars['ID'];
+  filter: FilterProductArgs;
 };
 
 export type QueryCategoryParents = {
