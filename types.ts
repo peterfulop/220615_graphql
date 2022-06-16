@@ -27,3 +27,14 @@ export type Scalars = {
 export type QueryProductArgs = {
   id: Scalars['ID'];
 };
+
+export type QueryCategoryArgs = {
+  id: Scalars['ID'];
+};
+
+export type QueryCategoryParents = {
+  id: Scalars['ID'];
+  name: string;
+};
+
+export type UnusedQueryParent = {};

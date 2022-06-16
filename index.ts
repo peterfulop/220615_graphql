@@ -1,7 +1,13 @@
 import { ApolloServer, gql } from 'apollo-server';
 import { makeExecutableSchema } from 'graphql-tools';
 import { products, categories } from './data/data';
-import { ApolloContext, QueryProductArgs } from './types';
+import {
+  ApolloContext,
+  QueryCategoryArgs,
+  QueryCategoryParents,
+  QueryProductArgs,
+  UnusedQueryParent,
+} from './types';
 
 const productTypeDef = gql`
   type Query {
@@ -31,14 +37,14 @@ const productTypeDef = gql`
 const productGQLModule = {
   Query: {
     products: (
-      _parent: any,
+      _parent: UnusedQueryParent,
       _args: QueryProductArgs,
       _context: ApolloContext
     ) => {
       return products;
     },
     product: (
-      _parent: any,
+      _parent: UnusedQueryParent,
       args: QueryProductArgs,
       _context: ApolloContext
     ) => {
@@ -48,15 +54,15 @@ const productGQLModule = {
       });
     },
     categories: (
-      _parent: any,
-      _args: QueryProductArgs,
+      _parent: QueryCategoryParents,
+      _args: QueryCategoryArgs,
       _context: ApolloContext
     ) => {
       return categories;
     },
     category: (
-      _parent: any,
-      args: QueryProductArgs,
+      _parent: UnusedQueryParent,
+      args: QueryCategoryArgs,
       _context: ApolloContext
     ) => {
       const { id } = args;
@@ -67,10 +73,15 @@ const productGQLModule = {
   },
   Category: {
     products: (
-      _parent: any,
-      _args: QueryProductArgs,
+      parent: QueryCategoryParents,
+      _args: QueryCategoryArgs,
       _context: ApolloContext
-    ) => {},
+    ) => {
+      const { id } = parent;
+      return products.filter((product) => {
+        return product.categoryId === id;
+      });
+    },
   },
 };
 
