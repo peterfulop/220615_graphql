@@ -3,11 +3,6 @@ import { makeExecutableSchema } from 'graphql-tools';
 
 const productTypeDef = gql`
   type Query {
-    hello: String!
-    numberOfAnumals: Int
-    price: Float
-    isCool: Boolean
-    testArray: [String!]!
     products: [Product!]!
   }
 
@@ -22,21 +17,6 @@ const productTypeDef = gql`
 
 const productGQLModule = {
   Query: {
-    hello: () => {
-      return 'World!';
-    },
-    numberOfAnumals: () => {
-      return 55;
-    },
-    price: () => {
-      return 23.99;
-    },
-    isCool: () => {
-      return true;
-    },
-    testArray: () => {
-      return ['Hello', 'my', 'Friends'];
-    },
     products: () => {
       return [
         {
