@@ -6,6 +6,7 @@ import {
   QueryCategoryArgs,
   QueryCategoryParents,
   QueryProductArgs,
+  QueryProductParents,
   UnusedQueryParent,
 } from './types';
 
@@ -25,6 +26,7 @@ const productTypeDef = gql`
     image: String!
     price: Float!
     onSale: Boolean!
+    category: Category
   }
 
   type Category {
@@ -80,6 +82,18 @@ const productGQLModule = {
       const { id } = parent;
       return products.filter((product) => {
         return product.categoryId === id;
+      });
+    },
+  },
+  Product: {
+    category: (
+      parent: QueryProductParents,
+      _args: QueryCategoryArgs,
+      _context: ApolloContext
+    ) => {
+      const { categoryId } = parent;
+      return categories.find((category) => {
+        return category.id === categoryId;
       });
     },
   },

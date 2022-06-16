@@ -37,4 +37,15 @@ export type QueryCategoryParents = {
   name: string;
 };
 
+export type QueryProductParents = {
+  id: string;
+  name: string;
+  description: string;
+  quantity: number;
+  image: string;
+  price: number;
+  onSale: boolean;
+  categoryId: string;
+};
+
 export type UnusedQueryParent = {};
