@@ -1,19 +1,29 @@
-import { categories } from '../../../data/data';
+import { ApolloContext } from '../../../apollo';
 import {
   QueryProductParents,
   QueryCategoryArgs,
-  ApolloContext,
+  QueryReviewParents,
 } from '../../../types';
 
 export const Product = {
   category: (
     parent: QueryProductParents,
     _args: QueryCategoryArgs,
-    _context: ApolloContext
+    context: ApolloContext
   ) => {
     const { categoryId } = parent;
-    return categories.find((category) => {
+    return context.categories.find((category) => {
       return category.id === categoryId;
+    });
+  },
+  reviews: (
+    parent: QueryReviewParents,
+    _args: QueryCategoryArgs,
+    context: ApolloContext
+  ) => {
+    const { id } = parent;
+    return context.reviews.filter((review) => {
+      return review.productId === id;
     });
   },
 };

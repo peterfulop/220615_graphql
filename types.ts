@@ -1,21 +1,29 @@
-export enum PermissionToNumber {
-  ADMIN = 1,
-  USER = 2,
-}
-
-export type SessionTokenPayload = {
-  userId: string;
-  permissionLevel: PermissionToNumber;
+export type Product = {
+  id: string;
   name: string;
-  email: string;
-  iat: number;
-  exp: number;
-  sub: string;
+  description: string;
+  quantity: number;
+  image: string;
+  price: number;
+  onSale: boolean;
+  category: Category;
 };
 
-export type ApolloContext = {
-  user: SessionTokenPayload | null;
+export type Category = {
+  id: string;
+  name: string;
+  products: Product[];
 };
+
+export type Review = {
+  id: string;
+  date: Date;
+  title: string;
+  comment: string;
+  rating: number;
+  productId: string;
+};
+
 export type Scalars = {
   ID: string;
   String: string;
@@ -37,8 +45,12 @@ export type QueryCategoryParents = {
   name: string;
 };
 
+export type QueryReviewParents = {
+  id: Scalars['ID'];
+};
+
 export type QueryProductParents = {
-  id: string;
+  id: Scalars['ID'];
   name: string;
   description: string;
   quantity: number;

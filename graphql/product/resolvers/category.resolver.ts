@@ -1,19 +1,15 @@
-import { products } from '../../../data/data';
-import {
-  QueryCategoryParents,
-  QueryCategoryArgs,
-  ApolloContext,
-} from '../../../types';
+import { ApolloContext } from '../../../apollo';
+import { QueryCategoryParents, QueryCategoryArgs } from '../../../types';
 
 export const Category = {
   products: (
     parent: QueryCategoryParents,
     _args: QueryCategoryArgs,
-    _context: ApolloContext
+    context: ApolloContext
   ) => {
     const { id } = parent;
-    return products.filter((product) => {
-      return product.categoryId === id;
+    return context.products.filter((product) => {
+      return product.category.id === id;
     });
   },
 };
