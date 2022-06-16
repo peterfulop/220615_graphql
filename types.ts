@@ -1,9 +1,6 @@
 export enum PermissionToNumber {
   ADMIN = 1,
-  APPRAISER = 2,
-  SELLER = 3,
-  INTERN = 4,
-  OUTSIDER = 5,
+  USER = 2,
 }
 
 export type SessionTokenPayload = {
