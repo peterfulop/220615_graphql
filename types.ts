@@ -122,5 +122,14 @@ export type QueryAddReviewArgs = {
   input: AddReviewInput;
 };
 
+export type UpdateCategoryInput = {
+  name: string;
+};
+
+export type QueryUpdateCategoryArgs = {
+  id: Scalars['ID'];
+  input: UpdateCategoryInput;
+};
+
 export type UnusedQueryParent = {};
 export type UnusedQueryArgs = {};

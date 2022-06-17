@@ -17,6 +17,7 @@ export const productTypeDef = gql`
     deleteCategory(id: ID!): Boolean!
     deleteProduct(id: ID!): Boolean!
     deleteReview(id: ID!): Boolean!
+    updateCategory(id: ID!, input: UpdateCategoryInput!): Category!
   }
 
   type Product {
@@ -70,5 +71,9 @@ export const productTypeDef = gql`
     comment: String!
     rating: Int!
     productId: String!
+  }
+
+  input UpdateCategoryInput {
+    name: String!
   }
 `;

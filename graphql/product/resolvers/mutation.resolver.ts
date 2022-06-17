@@ -1,4 +1,8 @@
-import { ApolloContext, QueryDeleteArgs } from '../../../types';
+import {
+  ApolloContext,
+  QueryDeleteArgs,
+  QueryUpdateCategoryArgs,
+} from '../../../types';
 import { v4 as uuidv4 } from 'uuid';
 import {
   UnusedQueryParent,
@@ -133,5 +137,20 @@ export const Mutation = {
       return review.id !== id;
     });
     return true;
+  },
+  updateCategory: (
+    _parent: UnusedQueryParent,
+    args: QueryUpdateCategoryArgs,
+    context: ApolloContext
+  ) => {
+    const { id, input } = args;
+    const index = context.db.categories.findIndex(
+      (category) => category.id === id
+    );
+    context.db.categories[index] = {
+      ...context.db.categories[index],
+      ...input,
+    };
+    return context.db.categories[index];
   },
 };
