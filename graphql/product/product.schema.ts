@@ -11,6 +11,7 @@ export const productTypeDef = gql`
   type Mutation {
     addCategory(input: AddCategoryInput!): Category
     addProduct(input: AddProductInput!): Product
+    addReview(input: AddReviewInput!): Review
   }
 
   type Product {
@@ -56,5 +57,13 @@ export const productTypeDef = gql`
     price: Float!
     onSale: Boolean!
     categoryId: String!
+  }
+
+  input AddReviewInput {
+    date: String!
+    title: String!
+    comment: String!
+    rating: Int!
+    productId: String!
   }
 `;

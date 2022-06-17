@@ -6,6 +6,8 @@ import {
   QueryAddCategoryArgs,
   QueryAddProductArgs,
   ProductItem,
+  QueryAddReviewArgs,
+  Review,
 } from '../../../types';
 import { isCategoryExists } from '../../../utils/isCategoryExists';
 import { isProductExists } from '../../../utils/isProductExists';
@@ -62,5 +64,24 @@ export const Mutation = {
     }
     context.products.push(newProduct);
     return newProduct;
+  },
+  addReview: (
+    parent: UnusedQueryParent,
+    args: QueryAddReviewArgs,
+    context: ApolloContext
+  ) => {
+    const { date, title, comment, rating, productId } = args.input;
+
+    const newReview = {
+      id: uuidv4(),
+      date,
+      title,
+      comment,
+      rating,
+      productId,
+    } as Review;
+
+    context.reviews.push(newReview);
+    return newReview;
   },
 };

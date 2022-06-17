@@ -105,4 +105,16 @@ export type QueryAddProductArgs = {
   input: AddProductInput;
 };
 
+export type AddReviewInput = {
+  date: Date;
+  title: string;
+  comment: string;
+  rating: number;
+  productId: string;
+};
+
+export type QueryAddReviewArgs = {
+  input: AddReviewInput;
+};
+
 export type UnusedQueryParent = {};
