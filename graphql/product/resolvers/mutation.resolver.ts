@@ -149,6 +149,7 @@ export const Mutation = {
     const index = context.db.categories.findIndex(
       (category: Category) => category.id === id
     );
+    if (index === -1) return null;
     context.db.categories[index] = {
       ...context.db.categories[index],
       ...input,
@@ -164,6 +165,7 @@ export const Mutation = {
     const index = context.db.products.findIndex(
       (product: Product) => product.id === id
     );
+    if (index === -1) return null;
     context.db.products[index] = {
       ...context.db.products[index],
       ...input,
@@ -179,6 +181,7 @@ export const Mutation = {
     const index = context.db.reviews.findIndex(
       (reviews: Review) => reviews.id === id
     );
+    if (index === -1) return null;
     context.db.reviews[index] = {
       ...context.db.reviews[index],
       ...input,
