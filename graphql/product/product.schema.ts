@@ -6,6 +6,8 @@ export const productTypeDef = gql`
     product(id: ID!): Product
     categories: [Category!]
     category(id: ID!): Category
+    reviews: [Review!]
+    review(id: ID!): Review
   }
 
   type Mutation {
@@ -14,6 +16,7 @@ export const productTypeDef = gql`
     addReview(input: AddReviewInput!): Review!
     deleteCategory(id: ID!): Boolean!
     deleteProduct(id: ID!): Boolean!
+    deleteReview(id: ID!): Boolean!
   }
 
   type Product {

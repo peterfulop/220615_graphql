@@ -1,4 +1,9 @@
-import { ApolloContext } from '../../../types';
+import {
+  ApolloContext,
+  QueryReviewArgs,
+  Review,
+  UnusedQueryArgs,
+} from '../../../types';
 import {
   Category,
   Product,
@@ -51,7 +56,7 @@ export const Query = {
   },
   categories: (
     _parent: UnusedQueryParent,
-    _args: QueryCategoryArgs,
+    _args: UnusedQueryArgs,
     context: ApolloContext
   ) => {
     return context.db.categories;
@@ -64,6 +69,23 @@ export const Query = {
     const { id } = args;
     return context.db.categories.find((category: Category) => {
       return category.id === id;
+    });
+  },
+  reviews: (
+    _parent: UnusedQueryParent,
+    _args: UnusedQueryArgs,
+    context: ApolloContext
+  ) => {
+    return context.db.reviews;
+  },
+  review: (
+    _parent: UnusedQueryParent,
+    args: QueryReviewArgs,
+    context: ApolloContext
+  ) => {
+    const { id } = args;
+    return context.db.reviews.find((review: Review) => {
+      return review.id === id;
     });
   },
 };

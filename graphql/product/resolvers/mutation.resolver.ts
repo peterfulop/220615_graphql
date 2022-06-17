@@ -121,4 +121,17 @@ export const Mutation = {
     });
     return true;
   },
+  deleteReview: (
+    _parent: UnusedQueryParent,
+    args: QueryDeleteArgs,
+    context: ApolloContext
+  ) => {
+    const { id } = args;
+    console.log(id);
+
+    context.db.reviews = context.db.reviews.filter((review: Review) => {
+      return review.id !== id;
+    });
+    return true;
+  },
 };

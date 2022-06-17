@@ -60,6 +60,10 @@ export type QueryCategoryArgs = {
   filter: FilterProductArgs;
 };
 
+export type QueryReviewArgs = {
+  id: Scalars['ID'];
+};
+
 export type QueryDeleteArgs = {
   id: Scalars['ID'];
 };
@@ -119,3 +123,4 @@ export type QueryAddReviewArgs = {
 };
 
 export type UnusedQueryParent = {};
+export type UnusedQueryArgs = {};
