@@ -72,7 +72,7 @@ export type QueryCategoryArgs = {
   filter: FilterProductArgs;
 };
 
-export type QueryCategoryDeleteArgs = {
+export type QueryDeleteArgs = {
   id: Scalars['ID'];
 };
 

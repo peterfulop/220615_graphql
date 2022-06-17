@@ -8,7 +8,10 @@ export const isProductExists = (
 
   return (
     products.findIndex((product: ProductItem) => {
-      return product.name === newProduct.name;
+      return (
+        product.name === newProduct.name &&
+        product.categoryId === newProduct.categoryId
+      );
     }) >= 0
   );
 };

@@ -1,4 +1,4 @@
-import { ApolloContext } from '../../../types';
+import { ApolloContext, QueryDeleteArgs } from '../../../types';
 import { v4 as uuidv4 } from 'uuid';
 import {
   UnusedQueryParent,
@@ -8,7 +8,6 @@ import {
   ProductItem,
   QueryAddReviewArgs,
   Review,
-  QueryCategoryDeleteArgs,
   Category,
 } from '../../../types';
 import { isCategoryExists } from '../../../utils/isCategoryExists';
@@ -45,7 +44,7 @@ export const Mutation = {
     const getCategory = getCategoryData(context.db.categories, categoryId);
     if (!getCategory) {
       console.log('getCategoryData', getCategory);
-      return;
+      return undefined;
     }
     const newProduct = {
       id: uuidv4(),
@@ -88,7 +87,7 @@ export const Mutation = {
   },
   deleteCategory: (
     _parent: UnusedQueryParent,
-    args: QueryCategoryDeleteArgs,
+    args: QueryDeleteArgs,
     context: ApolloContext
   ) => {
     const { id } = args;
@@ -98,9 +97,28 @@ export const Mutation = {
       }
     );
     context.db.products.map((product: ProductItem) => {
-      if (product.categoryId === id) return;
+      if (product.categoryId === id) {
+        return {
+          ...product,
+          categoryId: null,
+        };
+      } else return product;
     });
 
+    return true;
+  },
+  deleteProduct: (
+    _parent: UnusedQueryParent,
+    args: QueryDeleteArgs,
+    context: ApolloContext
+  ) => {
+    const { id } = args;
+    context.db.products = context.db.products.filter((product: ProductItem) => {
+      return product.id !== id;
+    });
+    context.db.reviews = context.db.reviews.filter((review: Review) => {
+      return review.productId !== id;
+    });
     return true;
   },
 };
