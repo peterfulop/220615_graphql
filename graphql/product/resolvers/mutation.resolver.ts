@@ -1,4 +1,4 @@
-import { ApolloContext } from '../../../apollo';
+import { ApolloContext } from '../../../types';
 import { v4 as uuidv4 } from 'uuid';
 import {
   UnusedQueryParent,
@@ -8,6 +8,8 @@ import {
   ProductItem,
   QueryAddReviewArgs,
   Review,
+  QueryCategoryDeleteArgs,
+  Category,
 } from '../../../types';
 import { isCategoryExists } from '../../../utils/isCategoryExists';
 import { isProductExists } from '../../../utils/isProductExists';
@@ -25,11 +27,11 @@ export const Mutation = {
       name,
     };
 
-    if (isCategoryExists(context.categories, name)) {
+    if (isCategoryExists(context.db.categories, name)) {
       return;
     }
 
-    context.categories.push(newCategory);
+    context.db.categories.push(newCategory);
     return newCategory;
   },
   addProduct: (
@@ -40,7 +42,7 @@ export const Mutation = {
     const { name, description, quantity, image, price, onSale, categoryId } =
       args.input;
 
-    const getCategory = getCategoryData(context.categories, categoryId);
+    const getCategory = getCategoryData(context.db.categories, categoryId);
     if (!getCategory) {
       console.log('getCategoryData', getCategory);
       return;
@@ -56,17 +58,17 @@ export const Mutation = {
       categoryId: getCategory.id,
     } as ProductItem;
 
-    const existsProduct = isProductExists(context.products, newProduct);
+    const existsProduct = isProductExists(context.db.products, newProduct);
 
     if (existsProduct) {
       console.log(`This product: ${name} is already exists!`);
       return;
     }
-    context.products.push(newProduct);
+    context.db.products.push(newProduct);
     return newProduct;
   },
   addReview: (
-    parent: UnusedQueryParent,
+    _parent: UnusedQueryParent,
     args: QueryAddReviewArgs,
     context: ApolloContext
   ) => {
@@ -81,7 +83,24 @@ export const Mutation = {
       productId,
     } as Review;
 
-    context.reviews.push(newReview);
+    context.db.reviews.push(newReview);
     return newReview;
+  },
+  deleteCategory: (
+    _parent: UnusedQueryParent,
+    args: QueryCategoryDeleteArgs,
+    context: ApolloContext
+  ) => {
+    const { id } = args;
+    context.db.categories = context.db.categories.filter(
+      (category: Category) => {
+        return category.id !== id;
+      }
+    );
+    context.db.products.map((product: ProductItem) => {
+      if (product.categoryId === id) return;
+    });
+
+    return true;
   },
 };

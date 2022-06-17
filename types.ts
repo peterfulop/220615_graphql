@@ -1,3 +1,12 @@
+export type ApolloContext = {
+  db: DB;
+};
+export type DB = {
+  products: ProductItem[];
+  categories: Category[];
+  reviews: Review[];
+};
+
 export type Product = {
   id: string;
   name: string;
@@ -61,6 +70,10 @@ export type QueryProductArgs = {
 export type QueryCategoryArgs = {
   id: Scalars['ID'];
   filter: FilterProductArgs;
+};
+
+export type QueryCategoryDeleteArgs = {
+  id: Scalars['ID'];
 };
 
 export type QueryCategoryParents = {

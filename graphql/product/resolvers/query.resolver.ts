@@ -1,7 +1,7 @@
-import { ApolloContext } from '../../../apollo';
+import { ApolloContext } from '../../../types';
 import {
   Category,
-  Product,
+  ProductItem,
   QueryCategoryArgs,
   QueryProductArgs,
   UnusedQueryParent,
@@ -18,26 +18,26 @@ export const Query = {
     context: ApolloContext
   ) => {
     const { filter } = args;
-    let filteredProducts: Product[] = context.products;
+    let filteredProducts: ProductItem[] = context.db.products;
 
     if (filter) {
       const { onSale, avgRating } = filter;
       if (onSale) {
-        filteredProducts = filteredProducts.filter((product: Product) => {
+        filteredProducts = filteredProducts.filter((product: ProductItem) => {
           return product.onSale;
         });
       }
 
       if (isRated(avgRating)) {
         filteredProducts = getProductsByAvgRating(
-          context.reviews,
+          context.db.reviews,
           filteredProducts,
           avgRating
         );
       }
       return filteredProducts;
     }
-    return context.products;
+    return context.db.products;
   },
   product: (
     _parent: UnusedQueryParent,
@@ -45,7 +45,7 @@ export const Query = {
     context: ApolloContext
   ) => {
     const { id } = args;
-    return context.products.find((product: Product) => {
+    return context.db.products.find((product: ProductItem) => {
       return product.id === id;
     });
   },
@@ -54,7 +54,7 @@ export const Query = {
     _args: QueryCategoryArgs,
     context: ApolloContext
   ) => {
-    return context.categories;
+    return context.db.categories;
   },
   category: (
     _parent: UnusedQueryParent,
@@ -62,7 +62,7 @@ export const Query = {
     context: ApolloContext
   ) => {
     const { id } = args;
-    return context.categories.find((category: Category) => {
+    return context.db.categories.find((category: Category) => {
       return category.id === id;
     });
   },

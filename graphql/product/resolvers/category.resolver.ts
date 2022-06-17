@@ -1,8 +1,8 @@
-import { ApolloContext } from '../../../apollo';
+import { ApolloContext } from '../../../types';
 import {
   QueryCategoryParents,
   QueryCategoryArgs,
-  Product,
+  ProductItem,
 } from '../../../types';
 import {
   getProductsByAvgRating,
@@ -16,12 +16,12 @@ export const Category = {
     context: ApolloContext
   ) => {
     const { filter } = args;
-    let filteredCategoryProducts = context.products;
+    let filteredCategoryProducts = context.db.products;
     if (filter) {
       const { onSale, avgRating } = filter;
       if (onSale) {
         filteredCategoryProducts = filteredCategoryProducts.filter(
-          (product: Product) => {
+          (product: ProductItem) => {
             return product.onSale;
           }
         );
@@ -30,7 +30,7 @@ export const Category = {
 
       if (isRated(avgRating)) {
         filteredCategoryProducts = getProductsByAvgRating(
-          context.reviews,
+          context.db.reviews,
           filteredCategoryProducts,
           avgRating
         );

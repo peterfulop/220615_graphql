@@ -1,4 +1,4 @@
-import { Product, Review } from '../types';
+import { Review, ProductItem } from '../types';
 
 export const isRated = (avgRating: number) => {
   return [1, 2, 3, 4, 5].includes(avgRating);
@@ -6,10 +6,10 @@ export const isRated = (avgRating: number) => {
 
 export const getProductsByAvgRating = (
   reviews: Review[],
-  filteredProducts: Product[],
+  filteredProducts: ProductItem[],
   avgRating: number
-): Product[] => {
-  return filteredProducts.filter((product: Product) => {
+): ProductItem[] => {
+  return filteredProducts.filter((product: ProductItem) => {
     let sumRating = 0;
     let numberOfReviews = 0;
     reviews.forEach((review: Review) => {

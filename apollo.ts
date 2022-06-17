@@ -2,14 +2,7 @@ import { ApolloServer } from 'apollo-server';
 import { makeExecutableSchema } from 'graphql-tools';
 import { productGQLModule } from './graphql/product/product.module';
 import { productTypeDef } from './graphql/product/product.schema';
-import { products, categories, reviews } from './data/data';
-import { Review, Category, Product } from './types';
-
-export type ApolloContext = {
-  products: Product[];
-  categories: Category[];
-  reviews: Review[];
-};
+import { db } from './data/data';
 
 const schema = makeExecutableSchema({
   typeDefs: [productTypeDef],
@@ -19,9 +12,7 @@ const schema = makeExecutableSchema({
 const server = new ApolloServer({
   schema,
   context: {
-    products,
-    categories,
-    reviews,
+    db,
   },
 });
 

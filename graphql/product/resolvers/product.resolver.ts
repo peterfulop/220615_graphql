@@ -1,4 +1,4 @@
-import { ApolloContext } from '../../../apollo';
+import { ApolloContext } from '../../../types';
 import {
   QueryProductParents,
   QueryCategoryArgs,
@@ -14,7 +14,7 @@ export const Product = {
     context: ApolloContext
   ) => {
     const { categoryId } = parent;
-    return context.categories.find((category: Category) => {
+    return context.db.categories.find((category: Category) => {
       return category.id === categoryId;
     });
   },
@@ -24,7 +24,7 @@ export const Product = {
     context: ApolloContext
   ) => {
     const { id } = parent;
-    return context.reviews.filter((review: Review) => {
+    return context.db.reviews.filter((review: Review) => {
       return review.productId === id;
     });
   },
