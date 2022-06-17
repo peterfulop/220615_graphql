@@ -131,5 +131,32 @@ export type QueryUpdateCategoryArgs = {
   input: UpdateCategoryInput;
 };
 
+export type UpdateProductInput = {
+  name: string;
+  description: string;
+  quantity: number;
+  image: string;
+  price: number;
+  onSale: boolean;
+  categoryId: string;
+};
+
+export type QueryUpdateProductArgs = {
+  id: Scalars['ID'];
+  input: UpdateProductInput;
+};
+
+export type UpdateReviewInput = {
+  date: Date;
+  title: string;
+  comment: string;
+  rating: number;
+};
+
+export type QueryUpdateReviewArgs = {
+  id: Scalars['ID'];
+  input: UpdateReviewInput;
+};
+
 export type UnusedQueryParent = {};
 export type UnusedQueryArgs = {};

@@ -2,6 +2,8 @@ import {
   ApolloContext,
   QueryDeleteArgs,
   QueryUpdateCategoryArgs,
+  QueryUpdateProductArgs,
+  QueryUpdateReviewArgs,
 } from '../../../types';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -145,12 +147,42 @@ export const Mutation = {
   ) => {
     const { id, input } = args;
     const index = context.db.categories.findIndex(
-      (category) => category.id === id
+      (category: Category) => category.id === id
     );
     context.db.categories[index] = {
       ...context.db.categories[index],
       ...input,
     };
     return context.db.categories[index];
+  },
+  updateProduct: (
+    _parent: UnusedQueryParent,
+    args: QueryUpdateProductArgs,
+    context: ApolloContext
+  ) => {
+    const { id, input } = args;
+    const index = context.db.products.findIndex(
+      (product: Product) => product.id === id
+    );
+    context.db.products[index] = {
+      ...context.db.products[index],
+      ...input,
+    };
+    return context.db.products[index];
+  },
+  updateReview: (
+    _parent: UnusedQueryParent,
+    args: QueryUpdateReviewArgs,
+    context: ApolloContext
+  ) => {
+    const { id, input } = args;
+    const index = context.db.reviews.findIndex(
+      (reviews: Review) => reviews.id === id
+    );
+    context.db.reviews[index] = {
+      ...context.db.reviews[index],
+      ...input,
+    };
+    return context.db.reviews[index];
   },
 };
