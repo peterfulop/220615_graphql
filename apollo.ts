@@ -3,7 +3,7 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { productGQLModule } from './graphql/product/product.module';
 import { productTypeDef } from './graphql/product/product.schema';
 import { products, categories, reviews } from './data/data';
-import { Product, Category, Review } from './types';
+import { Review, Category, Product } from './types';
 
 export type ApolloContext = {
   products: Product[];

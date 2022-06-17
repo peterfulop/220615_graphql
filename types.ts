@@ -6,13 +6,29 @@ export type Product = {
   image: string;
   price: number;
   onSale: boolean;
-  category: Category;
+  category?: Category;
 };
 
 export type Category = {
   id: string;
   name: string;
-  products: Product[];
+  products?: Product[];
+};
+
+export type CategoryItem = {
+  id: string;
+  name: string;
+};
+
+export type ProductItem = {
+  id: string;
+  name: string;
+  description: string;
+  quantity: number;
+  image: string;
+  price: number;
+  onSale: boolean;
+  categoryId: string;
 };
 
 export type Review = {
@@ -65,6 +81,28 @@ export type QueryProductParents = {
   price: number;
   onSale: boolean;
   categoryId: string;
+};
+
+export type AddCategoryInput = {
+  name: string;
+};
+
+export type QueryAddCategoryArgs = {
+  input: AddCategoryInput;
+};
+
+export type AddProductInput = {
+  name: string;
+  description: string;
+  quantity: number;
+  image: string;
+  price: number;
+  onSale: boolean;
+  categoryId: string;
+};
+
+export type QueryAddProductArgs = {
+  input: AddProductInput;
 };
 
 export type UnusedQueryParent = {};
