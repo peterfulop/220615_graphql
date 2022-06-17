@@ -46,7 +46,7 @@ export const Mutation = {
       console.log('getCategoryData', getCategory);
       return undefined;
     }
-    const newProduct = {
+    const newProduct: Product = {
       id: uuidv4(),
       name,
       description,
@@ -55,7 +55,7 @@ export const Mutation = {
       price,
       onSale,
       categoryId: getCategory.id,
-    } as Product;
+    };
 
     const existsProduct = isProductExists(context.db.products, newProduct);
 
@@ -73,14 +73,14 @@ export const Mutation = {
   ) => {
     const { date, title, comment, rating, productId } = args.input;
 
-    const newReview = {
+    const newReview: Review = {
       id: uuidv4(),
       date,
       title,
       comment,
       rating,
       productId,
-    } as Review;
+    };
 
     context.db.reviews.push(newReview);
     return newReview;
