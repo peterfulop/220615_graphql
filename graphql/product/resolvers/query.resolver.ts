@@ -1,7 +1,7 @@
 import { ApolloContext } from '../../../types';
 import {
   Category,
-  ProductItem,
+  Product,
   QueryCategoryArgs,
   QueryProductArgs,
   UnusedQueryParent,
@@ -18,12 +18,12 @@ export const Query = {
     context: ApolloContext
   ) => {
     const { filter } = args;
-    let filteredProducts: ProductItem[] = context.db.products;
+    let filteredProducts: Product[] = context.db.products;
 
     if (filter) {
       const { onSale, avgRating } = filter;
       if (onSale) {
-        filteredProducts = filteredProducts.filter((product: ProductItem) => {
+        filteredProducts = filteredProducts.filter((product: Product) => {
           return product.onSale;
         });
       }
@@ -45,7 +45,7 @@ export const Query = {
     context: ApolloContext
   ) => {
     const { id } = args;
-    return context.db.products.find((product: ProductItem) => {
+    return context.db.products.find((product: Product) => {
       return product.id === id;
     });
   },

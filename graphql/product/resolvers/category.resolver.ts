@@ -2,7 +2,7 @@ import { ApolloContext } from '../../../types';
 import {
   QueryCategoryParents,
   QueryCategoryArgs,
-  ProductItem,
+  Product,
 } from '../../../types';
 import {
   getProductsByAvgRating,
@@ -21,7 +21,7 @@ export const Category = {
       const { onSale, avgRating } = filter;
       if (onSale) {
         filteredCategoryProducts = filteredCategoryProducts.filter(
-          (product: ProductItem) => {
+          (product: Product) => {
             return product.onSale;
           }
         );

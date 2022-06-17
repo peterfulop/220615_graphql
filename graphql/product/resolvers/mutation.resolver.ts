@@ -5,7 +5,7 @@ import {
   CategoryItem,
   QueryAddCategoryArgs,
   QueryAddProductArgs,
-  ProductItem,
+  Product,
   QueryAddReviewArgs,
   Review,
   Category,
@@ -55,7 +55,7 @@ export const Mutation = {
       price,
       onSale,
       categoryId: getCategory.id,
-    } as ProductItem;
+    } as Product;
 
     const existsProduct = isProductExists(context.db.products, newProduct);
 
@@ -96,7 +96,7 @@ export const Mutation = {
         return category.id !== id;
       }
     );
-    context.db.products.map((product: ProductItem) => {
+    context.db.products.map((product: Product) => {
       if (product.categoryId === id) {
         return {
           ...product,
@@ -113,7 +113,7 @@ export const Mutation = {
     context: ApolloContext
   ) => {
     const { id } = args;
-    context.db.products = context.db.products.filter((product: ProductItem) => {
+    context.db.products = context.db.products.filter((product: Product) => {
       return product.id !== id;
     });
     context.db.reviews = context.db.reviews.filter((review: Review) => {

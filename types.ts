@@ -2,22 +2,10 @@ export type ApolloContext = {
   db: DB;
 };
 export type DB = {
-  products: ProductItem[];
+  products: Product[];
   categories: Category[];
   reviews: Review[];
 };
-
-export type Product = {
-  id: string;
-  name: string;
-  description: string;
-  quantity: number;
-  image: string;
-  price: number;
-  onSale: boolean;
-  category?: Category;
-};
-
 export type Category = {
   id: string;
   name: string;
@@ -29,7 +17,7 @@ export type CategoryItem = {
   name: string;
 };
 
-export type ProductItem = {
+export type Product = {
   id: string;
   name: string;
   description: string;

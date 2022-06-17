@@ -1,13 +1,10 @@
-import { ProductItem } from '../types';
+import { Product } from '../types';
 
-export const isProductExists = (
-  products: ProductItem[],
-  newProduct: ProductItem
-) => {
+export const isProductExists = (products: Product[], newProduct: Product) => {
   console.log(newProduct.categoryId);
 
   return (
-    products.findIndex((product: ProductItem) => {
+    products.findIndex((product: Product) => {
       return (
         product.name === newProduct.name &&
         product.categoryId === newProduct.categoryId
