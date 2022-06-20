@@ -1,3 +1,9 @@
+CREATE TABLE categories (
+  "id" uuid NOT NULL,
+  "name" text NOT NULL,
+  CONSTRAINT "categoriesPkey" PRIMARY KEY ("id")
+);
+
 CREATE TABLE products (
   "id" uuid NOT NULL,
   "name" text NOT NULL,
@@ -6,14 +12,8 @@ CREATE TABLE products (
   "image" text NOT NULL,
   "price" float NOT NULL,
   "onSale"  boolean DEFAULT true NOT NULL,
-  "category" text NOT NULL,
+  "categoryId" uuid NOT NULL,
   CONSTRAINT "productsPkey" PRIMARY KEY ("id")
-);
-
-CREATE TABLE categories (
-  "id" uuid NOT NULL,
-  "name" text NOT NULL,
-  CONSTRAINT "categoriesPkey" PRIMARY KEY ("id")
 );
 
 CREATE TABLE reviews (
@@ -22,6 +22,8 @@ CREATE TABLE reviews (
   "title" text NOT NULL,
   "comment" text NOT NULL,
   "rating" int NOT NULL,
-  "productId" text NULL,
+  "productId" uuid NOT NULL,
   CONSTRAINT "reviewsPkey" PRIMARY KEY ("id")
 );
+
+
