@@ -46,6 +46,7 @@ export const productTypeDef = gql`
     title: String!
     comment: String!
     rating: Int!
+    productId: String
   }
 
   input ProductsFilterInput {

@@ -1,4 +1,4 @@
-import { Category } from '../types';
+import { Category } from '../types/graphql-generated/graphql';
 
 export const isCategoryExists = (
   categories: Category[],

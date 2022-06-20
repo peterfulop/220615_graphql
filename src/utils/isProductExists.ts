@@ -1,13 +1,14 @@
-import { Product } from '../types';
+import { AddProductInput, Product } from '../types/graphql-generated/graphql';
 
-export const isProductExists = (products: Product[], newProduct: Product) => {
-  console.log(newProduct.categoryId);
-
+export const isProductExists = (
+  products: Product[],
+  newProduct: AddProductInput
+) => {
   return (
     products.findIndex((product: Product) => {
       return (
         product.name === newProduct.name &&
-        product.categoryId === newProduct.categoryId
+        product.category?.id === newProduct.categoryId
       );
     }) >= 0
   );

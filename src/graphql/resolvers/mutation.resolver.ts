@@ -1,45 +1,49 @@
 import { v4 as uuidv4 } from 'uuid';
 import { ApolloContext } from '../../apollo';
 import {
-  UnusedQueryParent,
-  QueryAddCategoryArgs,
-  CategoryItem,
-  QueryAddProductArgs,
-  Product,
-  QueryAddReviewArgs,
-  Review,
-  QueryDeleteArgs,
+  AddProductInput,
+  AddReviewInput,
   Category,
-  QueryUpdateCategoryArgs,
-  QueryUpdateProductArgs,
-  QueryUpdateReviewArgs,
-} from '../../types';
+  MutationAddCategoryArgs,
+  MutationAddProductArgs,
+  MutationAddReviewArgs,
+  MutationDeleteCategoryArgs,
+  MutationDeleteProductArgs,
+  MutationDeleteReviewArgs,
+  MutationResolvers,
+  MutationUpdateCategoryArgs,
+  MutationUpdateProductArgs,
+  MutationUpdateReviewArgs,
+  Product,
+  ResolversParentTypes,
+  Review,
+} from '../../types/graphql-generated/graphql';
 import { getCategoryData } from '../../utils/getCategoryData';
 import { isCategoryExists } from '../../utils/isCategoryExists';
 import { isProductExists } from '../../utils/isProductExists';
 
-export const Mutation = {
+export const Mutation: MutationResolvers = {
   addCategory: (
-    _parent: UnusedQueryParent,
-    args: QueryAddCategoryArgs,
+    _parent,
+    args: MutationAddCategoryArgs,
     context: ApolloContext
   ) => {
     const { name } = args.input;
-    const newCategory: CategoryItem = {
+    const newCategory = {
       id: uuidv4(),
       name,
     };
 
     if (isCategoryExists(context.db.categories, name)) {
-      return;
+      return {} as Category;
     }
 
     context.db.categories.push(newCategory);
-    return newCategory;
+    return newCategory as Category;
   },
   addProduct: (
-    _parent: UnusedQueryParent,
-    args: QueryAddProductArgs,
+    _parent,
+    args: MutationAddProductArgs,
     context: ApolloContext
   ) => {
     const { name, description, quantity, image, price, onSale, categoryId } =
@@ -48,9 +52,9 @@ export const Mutation = {
     const getCategory = getCategoryData(context.db.categories, categoryId);
     if (!getCategory) {
       console.log('getCategoryData', getCategory);
-      return undefined;
+      return {} as Product;
     }
-    const newProduct: Product = {
+    const newProduct = {
       id: uuidv4(),
       name,
       description,
@@ -59,25 +63,20 @@ export const Mutation = {
       price,
       onSale,
       categoryId: getCategory.id,
-    };
+    } as AddProductInput;
 
     const existsProduct = isProductExists(context.db.products, newProduct);
 
     if (existsProduct) {
       console.log(`This product: ${name} is already exists!`);
-      return;
+      return {} as Product;
     }
     context.db.products.push(newProduct);
-    return newProduct;
+    return newProduct as unknown as Product;
   },
-  addReview: (
-    _parent: UnusedQueryParent,
-    args: QueryAddReviewArgs,
-    context: ApolloContext
-  ) => {
+  addReview: (_parent, args: MutationAddReviewArgs, context: ApolloContext) => {
     const { date, title, comment, rating, productId } = args.input;
-
-    const newReview: Review = {
+    const newReview = {
       id: uuidv4(),
       date,
       title,
@@ -90,8 +89,8 @@ export const Mutation = {
     return newReview;
   },
   deleteCategory: (
-    _parent: UnusedQueryParent,
-    args: QueryDeleteArgs,
+    _parent,
+    args: MutationDeleteCategoryArgs,
     context: ApolloContext
   ) => {
     const { id } = args;
@@ -100,7 +99,7 @@ export const Mutation = {
         return category.id !== id;
       }
     );
-    context.db.products.map((product: Product) => {
+    context.db.products.map((product: AddProductInput) => {
       if (product.categoryId === id) {
         return {
           ...product,
@@ -112,22 +111,22 @@ export const Mutation = {
     return true;
   },
   deleteProduct: (
-    _parent: UnusedQueryParent,
-    args: QueryDeleteArgs,
+    _parent,
+    args: MutationDeleteProductArgs,
     context: ApolloContext
   ) => {
     const { id } = args;
     context.db.products = context.db.products.filter((product: Product) => {
       return product.id !== id;
     });
-    context.db.reviews = context.db.reviews.filter((review: Review) => {
+    context.db.reviews = context.db.reviews.filter((review: AddReviewInput) => {
       return review.productId !== id;
     });
     return true;
   },
   deleteReview: (
-    _parent: UnusedQueryParent,
-    args: QueryDeleteArgs,
+    _parent,
+    args: MutationDeleteReviewArgs,
     context: ApolloContext
   ) => {
     const { id } = args;
@@ -139,8 +138,8 @@ export const Mutation = {
     return true;
   },
   updateCategory: (
-    _parent: UnusedQueryParent,
-    args: QueryUpdateCategoryArgs,
+    _parent,
+    args: MutationUpdateCategoryArgs,
     context: ApolloContext
   ) => {
     const { id, input } = args;
@@ -155,8 +154,8 @@ export const Mutation = {
     return context.db.categories[index];
   },
   updateProduct: (
-    _parent: UnusedQueryParent,
-    args: QueryUpdateProductArgs,
+    _parent,
+    args: MutationUpdateProductArgs,
     context: ApolloContext
   ) => {
     const { id, input } = args;
@@ -171,8 +170,8 @@ export const Mutation = {
     return context.db.products[index];
   },
   updateReview: (
-    _parent: UnusedQueryParent,
-    args: QueryUpdateReviewArgs,
+    _parent,
+    args: MutationUpdateReviewArgs,
     context: ApolloContext
   ) => {
     const { id, input } = args;

@@ -1,4 +1,4 @@
-import { Review, Product } from '../types';
+import { Review, Product } from '../types/graphql-generated/graphql';
 
 export const isRated = (avgRating: number) => {
   return [1, 2, 3, 4, 5].includes(avgRating);

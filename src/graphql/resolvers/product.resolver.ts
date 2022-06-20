@@ -1,30 +1,20 @@
 import { ApolloContext } from '../../apollo';
 import {
-  QueryProductParents,
-  QueryCategoryArgs,
-  QueryReviewParents,
+  AddReviewInput,
   Category,
-  Review,
-} from '../../types';
+  ProductResolvers,
+} from '../../types/graphql-generated/graphql';
 
-export const Product = {
-  category: (
-    parent: QueryProductParents,
-    _args: QueryCategoryArgs,
-    context: ApolloContext
-  ) => {
-    const { categoryId } = parent;
+export const Product: ProductResolvers = {
+  category: (parent, _args, context: ApolloContext) => {
+    const { id: categoryId } = parent;
     return context.db.categories.find((category: Category) => {
       return category.id === categoryId;
     });
   },
-  reviews: (
-    parent: QueryReviewParents,
-    _args: QueryCategoryArgs,
-    context: ApolloContext
-  ) => {
+  reviews: (parent, _args, context: ApolloContext) => {
     const { id } = parent;
-    return context.db.reviews.filter((review: Review) => {
+    return context.db.reviews.filter((review: AddReviewInput) => {
       return review.productId === id;
     });
   },
