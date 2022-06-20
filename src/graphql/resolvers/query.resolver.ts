@@ -1,16 +1,16 @@
-import { ApolloContext } from '../../../apollo';
-import { QueryReviewArgs, Review, UnusedQueryArgs } from '../../../types';
+import { ApolloContext } from '../../apollo';
+import { QueryReviewArgs, Review, UnusedQueryArgs } from '../../types';
 import {
   Category,
   Product,
   QueryCategoryArgs,
   QueryProductArgs,
   UnusedQueryParent,
-} from '../../../types';
+} from '../../types';
 import {
   getProductsByAvgRating,
   isRated,
-} from '../../../utils/getProductsByAvgRating';
+} from '../../utils/getProductsByAvgRating';
 
 export const Query = {
   products: (

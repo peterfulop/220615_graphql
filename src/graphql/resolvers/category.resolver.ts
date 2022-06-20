@@ -1,13 +1,9 @@
-import { ApolloContext } from '../../../apollo';
-import {
-  QueryCategoryParents,
-  QueryCategoryArgs,
-  Product,
-} from '../../../types';
+import { ApolloContext } from '../../apollo';
+import { QueryCategoryParents, QueryCategoryArgs, Product } from '../../types';
 import {
   getProductsByAvgRating,
   isRated,
-} from '../../../utils/getProductsByAvgRating';
+} from '../../utils/getProductsByAvgRating';
 
 export const Category = {
   products: (

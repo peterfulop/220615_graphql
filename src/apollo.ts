@@ -1,11 +1,10 @@
-import { productGQLModule } from './graphql/product/product.module';
-import { productTypeDef } from './graphql/product/product.schema';
 import { makeExecutableSchema } from 'graphql-tools';
 import { GraphQLSchema } from 'graphql';
-import { DB } from './types';
 import { db } from './data/data';
 import { ApolloServer } from 'apollo-server-fastify';
-
+import { DB } from './types';
+import { productTypeDef } from './graphql/product.schema';
+import { productGQLModule } from './graphql/product.module';
 export interface ApolloInstance {
   server: ApolloServer;
   schema: GraphQLSchema;

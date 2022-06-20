@@ -1,24 +1,22 @@
-import {
-  QueryDeleteArgs,
-  QueryUpdateCategoryArgs,
-  QueryUpdateProductArgs,
-  QueryUpdateReviewArgs,
-} from '../../../types';
 import { v4 as uuidv4 } from 'uuid';
+import { ApolloContext } from '../../apollo';
 import {
   UnusedQueryParent,
-  CategoryItem,
   QueryAddCategoryArgs,
+  CategoryItem,
   QueryAddProductArgs,
   Product,
   QueryAddReviewArgs,
   Review,
+  QueryDeleteArgs,
   Category,
-} from '../../../types';
-import { isCategoryExists } from '../../../utils/isCategoryExists';
-import { isProductExists } from '../../../utils/isProductExists';
-import { getCategoryData } from '../../../utils/getCategoryData';
-import { ApolloContext } from '../../../apollo';
+  QueryUpdateCategoryArgs,
+  QueryUpdateProductArgs,
+  QueryUpdateReviewArgs,
+} from '../../types';
+import { getCategoryData } from '../../utils/getCategoryData';
+import { isCategoryExists } from '../../utils/isCategoryExists';
+import { isProductExists } from '../../utils/isProductExists';
 
 export const Mutation = {
   addCategory: (

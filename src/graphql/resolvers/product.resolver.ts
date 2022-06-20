@@ -1,11 +1,11 @@
-import { ApolloContext } from '../../../apollo';
+import { ApolloContext } from '../../apollo';
 import {
   QueryProductParents,
   QueryCategoryArgs,
   QueryReviewParents,
   Category,
   Review,
-} from '../../../types';
+} from '../../types';
 
 export const Product = {
   category: (
