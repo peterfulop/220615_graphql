@@ -1,1 +1,3 @@
 DROP TABLE products CASCADE;
+DROP TABLE categories CASCADE;
+DROP TABLE reviews CASCADE;
