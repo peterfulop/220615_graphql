@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start:apollo": "ts-node-dev ./src/server.ts",
-    "start:worker": "ts-node-dev --require dotenv/config worker.ts dotenv_config_path=/.env"
+    "start:worker": "ts-node-dev --require dotenv/config worker.ts dotenv_config_path=/.env",
+    "codegen:gql": "graphql-codegen --config codegen.yml"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.6.2"
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/typescript": "2.5.1",
+    "@graphql-codegen/typescript-resolvers": "^2.6.6"
   }
 }
