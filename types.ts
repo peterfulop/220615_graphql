@@ -1,6 +1,3 @@
-export type ApolloContext = {
-  db: DB;
-};
 export type DB = {
   products: Product[];
   categories: Category[];

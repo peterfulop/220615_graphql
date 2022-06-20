@@ -1,5 +1,4 @@
 import {
-  ApolloContext,
   QueryDeleteArgs,
   QueryUpdateCategoryArgs,
   QueryUpdateProductArgs,
@@ -19,6 +18,7 @@ import {
 import { isCategoryExists } from '../../../utils/isCategoryExists';
 import { isProductExists } from '../../../utils/isProductExists';
 import { getCategoryData } from '../../../utils/getCategoryData';
+import { ApolloContext } from '../../../apollo';
 
 export const Mutation = {
   addCategory: (

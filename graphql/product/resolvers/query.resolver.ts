@@ -1,9 +1,5 @@
-import {
-  ApolloContext,
-  QueryReviewArgs,
-  Review,
-  UnusedQueryArgs,
-} from '../../../types';
+import { ApolloContext } from '../../../apollo';
+import { QueryReviewArgs, Review, UnusedQueryArgs } from '../../../types';
 import {
   Category,
   Product,

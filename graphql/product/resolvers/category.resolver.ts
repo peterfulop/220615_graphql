@@ -1,4 +1,4 @@
-import { ApolloContext } from '../../../types';
+import { ApolloContext } from '../../../apollo';
 import {
   QueryCategoryParents,
   QueryCategoryArgs,
