@@ -2,7 +2,7 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { GraphQLSchema } from 'graphql';
 import { db } from './data/data';
 import { ApolloServer } from 'apollo-server-fastify';
-import { DB } from './_types';
+import { DB } from './types/types';
 import { productTypeDef } from './graphql/product.schema';
 import { productGQLModule } from './graphql/product.module';
 export interface ApolloInstance {
