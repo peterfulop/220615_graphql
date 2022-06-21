@@ -11,6 +11,12 @@ import { BASE_TYPE_DEF } from './framework/graphql/base.schema';
 import { categoryTypeDef } from './graphql/category/category.schema';
 import { DeleteCategoryUseCase } from './use-cases/category/delete-category.use.case';
 import { UpdateCategoryUseCase } from './use-cases/category/update-category.use-case';
+import { reviewTypeDef } from './graphql/review/review.schema';
+import { productTypeDef } from './graphql/product/products.schema';
+import { reviewGQLModuleFactory } from './graphql/review/review.module';
+import { CreateReviewUseCase } from './use-cases/review/create-review.use-case';
+import { GetReviewsUseCase } from './use-cases/review/get-reviews.use-case';
+import { GetReviewUseCase } from './use-cases/review/get-review.use-case';
 export interface ApolloInstance {
   server: ApolloServer;
   schema: GraphQLSchema;
@@ -27,6 +33,9 @@ export const createApolloServer = ({
   createCategoryUseCase,
   deleteCategoryUseCase,
   updateCategoryUseCase,
+  getReviewsUseCase,
+  getReviewUseCase,
+  createReviewUseCase,
 }: {
   transactionService: TransactionService;
   getCategoryUseCase: GetCategoryUseCase;
@@ -34,6 +43,9 @@ export const createApolloServer = ({
   createCategoryUseCase: CreateCategoryUseCase;
   deleteCategoryUseCase: DeleteCategoryUseCase;
   updateCategoryUseCase: UpdateCategoryUseCase;
+  getReviewsUseCase: GetReviewsUseCase;
+  getReviewUseCase: GetReviewUseCase;
+  createReviewUseCase: CreateReviewUseCase;
 }): ApolloInstance => {
   const categoryGQLModule = categoryGQLModuleFactory({
     transactionService,
@@ -44,9 +56,16 @@ export const createApolloServer = ({
     updateCategoryUseCase,
   });
 
+  const reviewGQLModule = reviewGQLModuleFactory({
+    transactionService,
+    getReviewsUseCase,
+    getReviewUseCase,
+    createReviewUseCase,
+  });
+
   const schema = makeExecutableSchema({
-    typeDefs: [BASE_TYPE_DEF, categoryTypeDef],
-    resolvers: [categoryGQLModule],
+    typeDefs: [BASE_TYPE_DEF, categoryTypeDef, reviewTypeDef, productTypeDef],
+    resolvers: [categoryGQLModule, reviewGQLModule],
   });
 
   return {

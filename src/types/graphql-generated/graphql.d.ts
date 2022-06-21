@@ -24,12 +24,36 @@ export type CreateCategoryInput = {
   name: Scalars['String'];
 };
 
+export type CreateProductInput = {
+  categoryId: Scalars['String'];
+  description: Scalars['String'];
+  image: Scalars['String'];
+  name: Scalars['String'];
+  onSale: Scalars['Boolean'];
+  price: Scalars['Float'];
+  quantity: Scalars['Int'];
+};
+
+export type CreateReviewInput = {
+  comment: Scalars['String'];
+  date: Scalars['String'];
+  productId: Scalars['String'];
+  rating: Scalars['Int'];
+  title: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   _?: Maybe<Scalars['Boolean']>;
   createCategory?: Maybe<Category>;
+  createProduct: Product;
+  createReview?: Maybe<Review>;
   deleteCategory?: Maybe<Scalars['Boolean']>;
+  deleteProduct: Scalars['Boolean'];
+  deleteReview: Scalars['Boolean'];
   updateCategory?: Maybe<Category>;
+  updateProduct?: Maybe<Product>;
+  updateReview?: Maybe<Review>;
 };
 
 
@@ -38,7 +62,27 @@ export type MutationCreateCategoryArgs = {
 };
 
 
+export type MutationCreateProductArgs = {
+  options: CreateProductInput;
+};
+
+
+export type MutationCreateReviewArgs = {
+  options: CreateReviewInput;
+};
+
+
 export type MutationDeleteCategoryArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteProductArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteReviewArgs = {
   id: Scalars['ID'];
 };
 
@@ -48,16 +92,70 @@ export type MutationUpdateCategoryArgs = {
   options: UpdateCategoryInput;
 };
 
+
+export type MutationUpdateProductArgs = {
+  id: Scalars['ID'];
+  options: UpdateProductInput;
+};
+
+
+export type MutationUpdateReviewArgs = {
+  id: Scalars['ID'];
+  options: UpdateReviewInput;
+};
+
+export type Product = {
+  __typename?: 'Product';
+  category?: Maybe<Category>;
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  image: Scalars['String'];
+  name: Scalars['String'];
+  onSale: Scalars['Boolean'];
+  price: Scalars['Float'];
+  quantity: Scalars['Int'];
+  reviews: Array<Review>;
+};
+
+export type ProductsFilterInput = {
+  avgRating?: InputMaybe<Scalars['Int']>;
+  onSale?: InputMaybe<Scalars['Boolean']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   _?: Maybe<Scalars['Boolean']>;
   categories?: Maybe<Array<Maybe<Category>>>;
   category?: Maybe<Category>;
+  product?: Maybe<Category>;
+  products?: Maybe<Array<Maybe<Category>>>;
+  review?: Maybe<Review>;
+  reviews?: Maybe<Array<Maybe<Review>>>;
 };
 
 
 export type QueryCategoryArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryProductArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryReviewArgs = {
+  id: Scalars['ID'];
+};
+
+export type Review = {
+  __typename?: 'Review';
+  comment: Scalars['String'];
+  date: Scalars['String'];
+  id: Scalars['ID'];
+  productId?: Maybe<Scalars['String']>;
+  rating: Scalars['Int'];
+  title: Scalars['String'];
 };
 
 export type Subscription = {
@@ -67,6 +165,23 @@ export type Subscription = {
 
 export type UpdateCategoryInput = {
   name: Scalars['String'];
+};
+
+export type UpdateProductInput = {
+  categoryId: Scalars['String'];
+  description: Scalars['String'];
+  image: Scalars['String'];
+  name: Scalars['String'];
+  onSale: Scalars['Boolean'];
+  price: Scalars['Float'];
+  quantity: Scalars['Int'];
+};
+
+export type UpdateReviewInput = {
+  comment: Scalars['String'];
+  date: Scalars['String'];
+  rating: Scalars['Int'];
+  title: Scalars['String'];
 };
 
 
@@ -141,12 +256,21 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Category: ResolverTypeWrapper<Category>;
   CreateCategoryInput: CreateCategoryInput;
+  CreateProductInput: CreateProductInput;
+  CreateReviewInput: CreateReviewInput;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
+  Product: ResolverTypeWrapper<Product>;
+  ProductsFilterInput: ProductsFilterInput;
   Query: ResolverTypeWrapper<{}>;
+  Review: ResolverTypeWrapper<Review>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Subscription: ResolverTypeWrapper<{}>;
   UpdateCategoryInput: UpdateCategoryInput;
+  UpdateProductInput: UpdateProductInput;
+  UpdateReviewInput: UpdateReviewInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -154,12 +278,21 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Category: Category;
   CreateCategoryInput: CreateCategoryInput;
+  CreateProductInput: CreateProductInput;
+  CreateReviewInput: CreateReviewInput;
+  Float: Scalars['Float'];
   ID: Scalars['ID'];
+  Int: Scalars['Int'];
   Mutation: {};
+  Product: Product;
+  ProductsFilterInput: ProductsFilterInput;
   Query: {};
+  Review: Review;
   String: Scalars['String'];
   Subscription: {};
   UpdateCategoryInput: UpdateCategoryInput;
+  UpdateProductInput: UpdateProductInput;
+  UpdateReviewInput: UpdateReviewInput;
 };
 
 export type CategoryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Category'] = ResolversParentTypes['Category']> = {
@@ -171,14 +304,47 @@ export type CategoryResolvers<ContextType = any, ParentType extends ResolversPar
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   _?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   createCategory?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, RequireFields<MutationCreateCategoryArgs, 'options'>>;
+  createProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationCreateProductArgs, 'options'>>;
+  createReview?: Resolver<Maybe<ResolversTypes['Review']>, ParentType, ContextType, RequireFields<MutationCreateReviewArgs, 'options'>>;
   deleteCategory?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationDeleteCategoryArgs, 'id'>>;
+  deleteProduct?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteProductArgs, 'id'>>;
+  deleteReview?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteReviewArgs, 'id'>>;
   updateCategory?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, RequireFields<MutationUpdateCategoryArgs, 'id' | 'options'>>;
+  updateProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationUpdateProductArgs, 'id' | 'options'>>;
+  updateReview?: Resolver<Maybe<ResolversTypes['Review']>, ParentType, ContextType, RequireFields<MutationUpdateReviewArgs, 'id' | 'options'>>;
+};
+
+export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
+  category?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  image?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  onSale?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  reviews?: Resolver<Array<ResolversTypes['Review']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   _?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   categories?: Resolver<Maybe<Array<Maybe<ResolversTypes['Category']>>>, ParentType, ContextType>;
   category?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, RequireFields<QueryCategoryArgs, 'id'>>;
+  product?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
+  products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Category']>>>, ParentType, ContextType>;
+  review?: Resolver<Maybe<ResolversTypes['Review']>, ParentType, ContextType, RequireFields<QueryReviewArgs, 'id'>>;
+  reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
+};
+
+export type ReviewResolvers<ContextType = any, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = {
+  comment?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  date?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  productId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  rating?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = {
@@ -188,7 +354,9 @@ export type SubscriptionResolvers<ContextType = any, ParentType extends Resolver
 export type Resolvers<ContextType = any> = {
   Category?: CategoryResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Review?: ReviewResolvers<ContextType>;
   Subscription?: SubscriptionResolvers<ContextType>;
 };
 

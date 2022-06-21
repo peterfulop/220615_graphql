@@ -1,32 +1,35 @@
 import { ApolloContext } from '../../apollo';
 import { v4 as uuidv4 } from 'uuid';
-
 import type {
-  Category,
-  MutationCreateCategoryArgs,
+  Review,
+  MutationCreateReviewArgs,
 } from '../../types/graphql-generated/graphql';
 import type { AsyncUseCase } from '../../framework/use-case/use-case';
-import type { CategoryRepo } from '../../repositories/category/category-repo';
+import { ReviewRepo } from '../../repositories/review/review-repo';
 
-export type CreateCategoryInput = {
-  args: MutationCreateCategoryArgs;
+export type CreateReviewInput = {
+  args: MutationCreateReviewArgs;
   context: ApolloContext;
 };
 
-export type CreateCategoryOutput = Category;
+export type CreateReviewOutput = Review;
 
-export type CreateCategoryUseCase = AsyncUseCase<
-  CreateCategoryInput,
-  CreateCategoryOutput
+export type CreateReviewUseCase = AsyncUseCase<
+  CreateReviewInput,
+  CreateReviewOutput
 >;
 
-export const createCategoryUseCaseFactory =
-  ({ categoryRepo }: { categoryRepo: CategoryRepo }): CreateCategoryUseCase =>
+export const createReviewUseCaseFactory =
+  ({ reviewRepo }: { reviewRepo: ReviewRepo }): CreateReviewUseCase =>
   async (input) => {
     const itemOptions = {
       id: uuidv4(),
-      name: input.args.options.name,
+      date: new Date(Date.now()),
+      title: input.args.options.title,
+      comment: input.args.options.comment,
+      rating: input.args.options.rating as number,
+      productId: input.args.options.productId,
     };
-    await categoryRepo.add(itemOptions);
-    return { ...itemOptions } as unknown as Category;
+    await reviewRepo.add(itemOptions);
+    return { ...itemOptions } as unknown as Review;
   };

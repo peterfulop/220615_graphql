@@ -1,13 +1,13 @@
 import { gql } from 'apollo-server';
 
 export const reviewTypeDef = gql`
-  type Query {
+  extend type Query {
     reviews: [Review]
     review(id: ID!): Review
   }
 
   type Mutation {
-    createReview(input: CreateReviewInput!): Review!
+    createReview(options: CreateReviewInput!): Review
     deleteReview(id: ID!): Boolean!
     updateReview(id: ID!, options: UpdateReviewInput!): Review
   }
