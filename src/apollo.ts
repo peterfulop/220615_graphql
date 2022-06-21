@@ -2,22 +2,38 @@ import { makeExecutableSchema } from 'graphql-tools';
 import { GraphQLSchema } from 'graphql';
 import { db } from './data/data';
 import { ApolloServer } from 'apollo-server-fastify';
-import { DB } from './types/types';
+import { GetCategoryUseCase } from './use-cases/category/get-category.use-case';
+import { GetCategoriesUseCase } from './use-cases/category/get-categories.use-case';
+import { categoryGQLModuleFactory } from './graphql/category/category.module';
+import { TransactionService } from './framework/transaction/transaction-service';
 import { productTypeDef } from './graphql/product.schema';
-import { productGQLModule } from './graphql/product.module';
 export interface ApolloInstance {
   server: ApolloServer;
   schema: GraphQLSchema;
 }
 
 export type ApolloContext = {
-  db: DB;
+  db: any;
 };
 
-export const createAPolloServer = (): ApolloInstance => {
+export const createApolloServer = ({
+  transactionService,
+  getCategoryUseCase,
+  getCategoriesUseCase,
+}: {
+  transactionService: TransactionService;
+  getCategoryUseCase: GetCategoryUseCase;
+  getCategoriesUseCase: GetCategoriesUseCase;
+}): ApolloInstance => {
+  const categoryGQLModule = categoryGQLModuleFactory({
+    transactionService,
+    getCategoryUseCase,
+    getCategoriesUseCase,
+  });
+
   const schema = makeExecutableSchema({
     typeDefs: [productTypeDef],
-    resolvers: [productGQLModule],
+    resolvers: [categoryGQLModule],
   });
 
   return {

@@ -15,7 +15,6 @@ import {
   MutationUpdateProductArgs,
   MutationUpdateReviewArgs,
   Product,
-  ResolversParentTypes,
   Review,
 } from '../../types/graphql-generated/graphql';
 import { getCategoryData } from '../../utils/getCategoryData';

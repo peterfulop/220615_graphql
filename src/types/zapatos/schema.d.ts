@@ -8,12 +8,12 @@ Released under the MIT licence: see LICENCE file
 */
 
 declare module 'zapatos/schema' {
-
   import type * as db from 'zapatos/db';
 
   // got a type error on schemaVersionCanary below? update by running `npx zapatos`
-  export interface schemaVersionCanary extends db.SchemaVersionCanary { version: 104 }
-
+  export interface schemaVersionCanary extends db.SchemaVersionCanary {
+    version: 104;
+  }
 
   /* === schema: public === */
 
@@ -30,78 +30,112 @@ declare module 'zapatos/schema' {
     export type Table = 'categories';
     export interface Selectable {
       /**
-      * **categories.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id: string;
+       * **categories.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id: string;
       /**
-      * **categories.name**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    name: string;
+       * **categories.name**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      name: string;
     }
     export interface JSONSelectable {
       /**
-      * **categories.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id: string;
+       * **categories.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id: string;
       /**
-      * **categories.name**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    name: string;
+       * **categories.name**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      name: string;
     }
     export interface Whereable {
       /**
-      * **categories.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
+       * **categories.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            string | db.Parameter<string> | db.SQLFragment | db.ParentColumn
+          >;
       /**
-      * **categories.name**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    name?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
+       * **categories.name**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      name?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            string | db.Parameter<string> | db.SQLFragment | db.ParentColumn
+          >;
     }
     export interface Insertable {
       /**
-      * **categories.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id: string | db.Parameter<string> | db.SQLFragment;
+       * **categories.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id: string | db.Parameter<string> | db.SQLFragment;
       /**
-      * **categories.name**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    name: string | db.Parameter<string> | db.SQLFragment;
+       * **categories.name**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      name: string | db.Parameter<string> | db.SQLFragment;
     }
     export interface Updatable {
       /**
-      * **categories.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
+       * **categories.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
       /**
-      * **categories.name**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    name?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
+       * **categories.name**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      name?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
     }
     export type UniqueIndex = 'categoriesPkey';
     export type Column = keyof Selectable;
-    export type OnlyCols<T extends readonly Column[]> = Pick<Selectable, T[number]>;
-    export type SQLExpression = Table | db.ColumnNames<Updatable | (keyof Updatable)[]> | db.ColumnValues<Updatable> | Whereable | Column | db.ParentColumn | db.GenericSQLExpression;
+    export type OnlyCols<T extends readonly Column[]> = Pick<
+      Selectable,
+      T[number]
+    >;
+    export type SQLExpression =
+      | Table
+      | db.ColumnNames<Updatable | (keyof Updatable)[]>
+      | db.ColumnValues<Updatable>
+      | Whereable
+      | Column
+      | db.ParentColumn
+      | db.GenericSQLExpression;
     export type SQL = SQLExpression | SQLExpression[];
   }
 
@@ -113,258 +147,372 @@ declare module 'zapatos/schema' {
     export type Table = 'products';
     export interface Selectable {
       /**
-      * **products.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id: string;
+       * **products.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id: string;
       /**
-      * **products.name**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    name: string;
+       * **products.name**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      name: string;
       /**
-      * **products.description**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    description: string;
+       * **products.description**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      description: string;
       /**
-      * **products.quantity**
-      * - `int4` in database
-      * - `NOT NULL`, no default
-      */
-    quantity: number;
+       * **products.quantity**
+       * - `int4` in database
+       * - `NOT NULL`, no default
+       */
+      quantity: number;
       /**
-      * **products.image**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    image: string;
+       * **products.image**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      image: string;
       /**
-      * **products.price**
-      * - `float8` in database
-      * - `NOT NULL`, no default
-      */
-    price: number;
+       * **products.price**
+       * - `float8` in database
+       * - `NOT NULL`, no default
+       */
+      price: number;
       /**
-      * **products.onSale**
-      * - `bool` in database
-      * - `NOT NULL`, default: `true`
-      */
-    onSale: boolean;
+       * **products.onSale**
+       * - `bool` in database
+       * - `NOT NULL`, default: `true`
+       */
+      onSale: boolean;
       /**
-      * **products.categoryId**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    categoryId: string;
+       * **products.categoryId**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      categoryId: string;
     }
     export interface JSONSelectable {
       /**
-      * **products.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id: string;
+       * **products.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id: string;
       /**
-      * **products.name**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    name: string;
+       * **products.name**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      name: string;
       /**
-      * **products.description**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    description: string;
+       * **products.description**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      description: string;
       /**
-      * **products.quantity**
-      * - `int4` in database
-      * - `NOT NULL`, no default
-      */
-    quantity: number;
+       * **products.quantity**
+       * - `int4` in database
+       * - `NOT NULL`, no default
+       */
+      quantity: number;
       /**
-      * **products.image**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    image: string;
+       * **products.image**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      image: string;
       /**
-      * **products.price**
-      * - `float8` in database
-      * - `NOT NULL`, no default
-      */
-    price: number;
+       * **products.price**
+       * - `float8` in database
+       * - `NOT NULL`, no default
+       */
+      price: number;
       /**
-      * **products.onSale**
-      * - `bool` in database
-      * - `NOT NULL`, default: `true`
-      */
-    onSale: boolean;
+       * **products.onSale**
+       * - `bool` in database
+       * - `NOT NULL`, default: `true`
+       */
+      onSale: boolean;
       /**
-      * **products.categoryId**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    categoryId: string;
+       * **products.categoryId**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      categoryId: string;
     }
     export interface Whereable {
       /**
-      * **products.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
+       * **products.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            string | db.Parameter<string> | db.SQLFragment | db.ParentColumn
+          >;
       /**
-      * **products.name**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    name?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
+       * **products.name**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      name?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            string | db.Parameter<string> | db.SQLFragment | db.ParentColumn
+          >;
       /**
-      * **products.description**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    description?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
+       * **products.description**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      description?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            string | db.Parameter<string> | db.SQLFragment | db.ParentColumn
+          >;
       /**
-      * **products.quantity**
-      * - `int4` in database
-      * - `NOT NULL`, no default
-      */
-    quantity?: number | db.Parameter<number> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment | db.ParentColumn>;
+       * **products.quantity**
+       * - `int4` in database
+       * - `NOT NULL`, no default
+       */
+      quantity?:
+        | number
+        | db.Parameter<number>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            number | db.Parameter<number> | db.SQLFragment | db.ParentColumn
+          >;
       /**
-      * **products.image**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    image?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
+       * **products.image**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      image?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            string | db.Parameter<string> | db.SQLFragment | db.ParentColumn
+          >;
       /**
-      * **products.price**
-      * - `float8` in database
-      * - `NOT NULL`, no default
-      */
-    price?: number | db.Parameter<number> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment | db.ParentColumn>;
+       * **products.price**
+       * - `float8` in database
+       * - `NOT NULL`, no default
+       */
+      price?:
+        | number
+        | db.Parameter<number>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            number | db.Parameter<number> | db.SQLFragment | db.ParentColumn
+          >;
       /**
-      * **products.onSale**
-      * - `bool` in database
-      * - `NOT NULL`, default: `true`
-      */
-    onSale?: boolean | db.Parameter<boolean> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, boolean | db.Parameter<boolean> | db.SQLFragment | db.ParentColumn>;
+       * **products.onSale**
+       * - `bool` in database
+       * - `NOT NULL`, default: `true`
+       */
+      onSale?:
+        | boolean
+        | db.Parameter<boolean>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            boolean | db.Parameter<boolean> | db.SQLFragment | db.ParentColumn
+          >;
       /**
-      * **products.categoryId**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    categoryId?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
+       * **products.categoryId**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      categoryId?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            string | db.Parameter<string> | db.SQLFragment | db.ParentColumn
+          >;
     }
     export interface Insertable {
       /**
-      * **products.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id: string | db.Parameter<string> | db.SQLFragment;
+       * **products.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id: string | db.Parameter<string> | db.SQLFragment;
       /**
-      * **products.name**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    name: string | db.Parameter<string> | db.SQLFragment;
+       * **products.name**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      name: string | db.Parameter<string> | db.SQLFragment;
       /**
-      * **products.description**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    description: string | db.Parameter<string> | db.SQLFragment;
+       * **products.description**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      description: string | db.Parameter<string> | db.SQLFragment;
       /**
-      * **products.quantity**
-      * - `int4` in database
-      * - `NOT NULL`, no default
-      */
-    quantity: number | db.Parameter<number> | db.SQLFragment;
+       * **products.quantity**
+       * - `int4` in database
+       * - `NOT NULL`, no default
+       */
+      quantity: number | db.Parameter<number> | db.SQLFragment;
       /**
-      * **products.image**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    image: string | db.Parameter<string> | db.SQLFragment;
+       * **products.image**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      image: string | db.Parameter<string> | db.SQLFragment;
       /**
-      * **products.price**
-      * - `float8` in database
-      * - `NOT NULL`, no default
-      */
-    price: number | db.Parameter<number> | db.SQLFragment;
+       * **products.price**
+       * - `float8` in database
+       * - `NOT NULL`, no default
+       */
+      price: number | db.Parameter<number> | db.SQLFragment;
       /**
-      * **products.onSale**
-      * - `bool` in database
-      * - `NOT NULL`, default: `true`
-      */
-    onSale?: boolean | db.Parameter<boolean> | db.DefaultType | db.SQLFragment;
+       * **products.onSale**
+       * - `bool` in database
+       * - `NOT NULL`, default: `true`
+       */
+      onSale?:
+        | boolean
+        | db.Parameter<boolean>
+        | db.DefaultType
+        | db.SQLFragment;
       /**
-      * **products.categoryId**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    categoryId: string | db.Parameter<string> | db.SQLFragment;
+       * **products.categoryId**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      categoryId: string | db.Parameter<string> | db.SQLFragment;
     }
     export interface Updatable {
       /**
-      * **products.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
+       * **products.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
       /**
-      * **products.name**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    name?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
+       * **products.name**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      name?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
       /**
-      * **products.description**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    description?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
+       * **products.description**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      description?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
       /**
-      * **products.quantity**
-      * - `int4` in database
-      * - `NOT NULL`, no default
-      */
-    quantity?: number | db.Parameter<number> | db.SQLFragment | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment>;
+       * **products.quantity**
+       * - `int4` in database
+       * - `NOT NULL`, no default
+       */
+      quantity?:
+        | number
+        | db.Parameter<number>
+        | db.SQLFragment
+        | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment>;
       /**
-      * **products.image**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    image?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
+       * **products.image**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      image?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
       /**
-      * **products.price**
-      * - `float8` in database
-      * - `NOT NULL`, no default
-      */
-    price?: number | db.Parameter<number> | db.SQLFragment | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment>;
+       * **products.price**
+       * - `float8` in database
+       * - `NOT NULL`, no default
+       */
+      price?:
+        | number
+        | db.Parameter<number>
+        | db.SQLFragment
+        | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment>;
       /**
-      * **products.onSale**
-      * - `bool` in database
-      * - `NOT NULL`, default: `true`
-      */
-    onSale?: boolean | db.Parameter<boolean> | db.DefaultType | db.SQLFragment | db.SQLFragment<any, boolean | db.Parameter<boolean> | db.DefaultType | db.SQLFragment>;
+       * **products.onSale**
+       * - `bool` in database
+       * - `NOT NULL`, default: `true`
+       */
+      onSale?:
+        | boolean
+        | db.Parameter<boolean>
+        | db.DefaultType
+        | db.SQLFragment
+        | db.SQLFragment<
+            any,
+            boolean | db.Parameter<boolean> | db.DefaultType | db.SQLFragment
+          >;
       /**
-      * **products.categoryId**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    categoryId?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
+       * **products.categoryId**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      categoryId?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
     }
     export type UniqueIndex = 'productsPkey';
     export type Column = keyof Selectable;
-    export type OnlyCols<T extends readonly Column[]> = Pick<Selectable, T[number]>;
-    export type SQLExpression = Table | db.ColumnNames<Updatable | (keyof Updatable)[]> | db.ColumnValues<Updatable> | Whereable | Column | db.ParentColumn | db.GenericSQLExpression;
+    export type OnlyCols<T extends readonly Column[]> = Pick<
+      Selectable,
+      T[number]
+    >;
+    export type SQLExpression =
+      | Table
+      | db.ColumnNames<Updatable | (keyof Updatable)[]>
+      | db.ColumnValues<Updatable>
+      | Whereable
+      | Column
+      | db.ParentColumn
+      | db.GenericSQLExpression;
     export type SQL = SQLExpression | SQLExpression[];
   }
 
@@ -376,221 +524,341 @@ declare module 'zapatos/schema' {
     export type Table = 'reviews';
     export interface Selectable {
       /**
-      * **reviews.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id: string;
+       * **reviews.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id: string;
       /**
-      * **reviews.date**
-      * - `timestamptz` in database
-      * - `NOT NULL`, default: `now()`
-      */
-    date: Date;
+       * **reviews.date**
+       * - `timestamptz` in database
+       * - `NOT NULL`, default: `now()`
+       */
+      date: Date;
       /**
-      * **reviews.title**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    title: string;
+       * **reviews.title**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      title: string;
       /**
-      * **reviews.comment**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    comment: string;
+       * **reviews.comment**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      comment: string;
       /**
-      * **reviews.rating**
-      * - `int4` in database
-      * - `NOT NULL`, no default
-      */
-    rating: number;
+       * **reviews.rating**
+       * - `int4` in database
+       * - `NOT NULL`, no default
+       */
+      rating: number;
       /**
-      * **reviews.productId**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    productId: string;
+       * **reviews.productId**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      productId: string;
     }
     export interface JSONSelectable {
       /**
-      * **reviews.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id: string;
+       * **reviews.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id: string;
       /**
-      * **reviews.date**
-      * - `timestamptz` in database
-      * - `NOT NULL`, default: `now()`
-      */
-    date: db.TimestampTzString;
+       * **reviews.date**
+       * - `timestamptz` in database
+       * - `NOT NULL`, default: `now()`
+       */
+      date: db.TimestampTzString;
       /**
-      * **reviews.title**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    title: string;
+       * **reviews.title**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      title: string;
       /**
-      * **reviews.comment**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    comment: string;
+       * **reviews.comment**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      comment: string;
       /**
-      * **reviews.rating**
-      * - `int4` in database
-      * - `NOT NULL`, no default
-      */
-    rating: number;
+       * **reviews.rating**
+       * - `int4` in database
+       * - `NOT NULL`, no default
+       */
+      rating: number;
       /**
-      * **reviews.productId**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    productId: string;
+       * **reviews.productId**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      productId: string;
     }
     export interface Whereable {
       /**
-      * **reviews.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
+       * **reviews.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            string | db.Parameter<string> | db.SQLFragment | db.ParentColumn
+          >;
       /**
-      * **reviews.date**
-      * - `timestamptz` in database
-      * - `NOT NULL`, default: `now()`
-      */
-    date?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.SQLFragment | db.ParentColumn>;
+       * **reviews.date**
+       * - `timestamptz` in database
+       * - `NOT NULL`, default: `now()`
+       */
+      date?:
+        | (db.TimestampTzString | Date)
+        | db.Parameter<db.TimestampTzString | Date>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            | (db.TimestampTzString | Date)
+            | db.Parameter<db.TimestampTzString | Date>
+            | db.SQLFragment
+            | db.ParentColumn
+          >;
       /**
-      * **reviews.title**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    title?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
+       * **reviews.title**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      title?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            string | db.Parameter<string> | db.SQLFragment | db.ParentColumn
+          >;
       /**
-      * **reviews.comment**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    comment?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
+       * **reviews.comment**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      comment?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            string | db.Parameter<string> | db.SQLFragment | db.ParentColumn
+          >;
       /**
-      * **reviews.rating**
-      * - `int4` in database
-      * - `NOT NULL`, no default
-      */
-    rating?: number | db.Parameter<number> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment | db.ParentColumn>;
+       * **reviews.rating**
+       * - `int4` in database
+       * - `NOT NULL`, no default
+       */
+      rating?:
+        | number
+        | db.Parameter<number>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            number | db.Parameter<number> | db.SQLFragment | db.ParentColumn
+          >;
       /**
-      * **reviews.productId**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    productId?: string | db.Parameter<string> | db.SQLFragment | db.ParentColumn | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment | db.ParentColumn>;
+       * **reviews.productId**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      productId?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.ParentColumn
+        | db.SQLFragment<
+            any,
+            string | db.Parameter<string> | db.SQLFragment | db.ParentColumn
+          >;
     }
     export interface Insertable {
       /**
-      * **reviews.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id: string | db.Parameter<string> | db.SQLFragment;
+       * **reviews.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id: string | db.Parameter<string> | db.SQLFragment;
       /**
-      * **reviews.date**
-      * - `timestamptz` in database
-      * - `NOT NULL`, default: `now()`
-      */
-    date?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.DefaultType | db.SQLFragment;
+       * **reviews.date**
+       * - `timestamptz` in database
+       * - `NOT NULL`, default: `now()`
+       */
+      date?:
+        | (db.TimestampTzString | Date)
+        | db.Parameter<db.TimestampTzString | Date>
+        | db.DefaultType
+        | db.SQLFragment;
       /**
-      * **reviews.title**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    title: string | db.Parameter<string> | db.SQLFragment;
+       * **reviews.title**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      title: string | db.Parameter<string> | db.SQLFragment;
       /**
-      * **reviews.comment**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    comment: string | db.Parameter<string> | db.SQLFragment;
+       * **reviews.comment**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      comment: string | db.Parameter<string> | db.SQLFragment;
       /**
-      * **reviews.rating**
-      * - `int4` in database
-      * - `NOT NULL`, no default
-      */
-    rating: number | db.Parameter<number> | db.SQLFragment;
+       * **reviews.rating**
+       * - `int4` in database
+       * - `NOT NULL`, no default
+       */
+      rating: number | db.Parameter<number> | db.SQLFragment;
       /**
-      * **reviews.productId**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    productId: string | db.Parameter<string> | db.SQLFragment;
+       * **reviews.productId**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      productId: string | db.Parameter<string> | db.SQLFragment;
     }
     export interface Updatable {
       /**
-      * **reviews.id**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    id?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
+       * **reviews.id**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      id?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
       /**
-      * **reviews.date**
-      * - `timestamptz` in database
-      * - `NOT NULL`, default: `now()`
-      */
-    date?: (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.DefaultType | db.SQLFragment | db.SQLFragment<any, (db.TimestampTzString | Date) | db.Parameter<(db.TimestampTzString | Date)> | db.DefaultType | db.SQLFragment>;
+       * **reviews.date**
+       * - `timestamptz` in database
+       * - `NOT NULL`, default: `now()`
+       */
+      date?:
+        | (db.TimestampTzString | Date)
+        | db.Parameter<db.TimestampTzString | Date>
+        | db.DefaultType
+        | db.SQLFragment
+        | db.SQLFragment<
+            any,
+            | (db.TimestampTzString | Date)
+            | db.Parameter<db.TimestampTzString | Date>
+            | db.DefaultType
+            | db.SQLFragment
+          >;
       /**
-      * **reviews.title**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    title?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
+       * **reviews.title**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      title?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
       /**
-      * **reviews.comment**
-      * - `text` in database
-      * - `NOT NULL`, no default
-      */
-    comment?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
+       * **reviews.comment**
+       * - `text` in database
+       * - `NOT NULL`, no default
+       */
+      comment?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
       /**
-      * **reviews.rating**
-      * - `int4` in database
-      * - `NOT NULL`, no default
-      */
-    rating?: number | db.Parameter<number> | db.SQLFragment | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment>;
+       * **reviews.rating**
+       * - `int4` in database
+       * - `NOT NULL`, no default
+       */
+      rating?:
+        | number
+        | db.Parameter<number>
+        | db.SQLFragment
+        | db.SQLFragment<any, number | db.Parameter<number> | db.SQLFragment>;
       /**
-      * **reviews.productId**
-      * - `uuid` in database
-      * - `NOT NULL`, no default
-      */
-    productId?: string | db.Parameter<string> | db.SQLFragment | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
+       * **reviews.productId**
+       * - `uuid` in database
+       * - `NOT NULL`, no default
+       */
+      productId?:
+        | string
+        | db.Parameter<string>
+        | db.SQLFragment
+        | db.SQLFragment<any, string | db.Parameter<string> | db.SQLFragment>;
     }
     export type UniqueIndex = 'reviewsPkey';
     export type Column = keyof Selectable;
-    export type OnlyCols<T extends readonly Column[]> = Pick<Selectable, T[number]>;
-    export type SQLExpression = Table | db.ColumnNames<Updatable | (keyof Updatable)[]> | db.ColumnValues<Updatable> | Whereable | Column | db.ParentColumn | db.GenericSQLExpression;
+    export type OnlyCols<T extends readonly Column[]> = Pick<
+      Selectable,
+      T[number]
+    >;
+    export type SQLExpression =
+      | Table
+      | db.ColumnNames<Updatable | (keyof Updatable)[]>
+      | db.ColumnValues<Updatable>
+      | Whereable
+      | Column
+      | db.ParentColumn
+      | db.GenericSQLExpression;
     export type SQL = SQLExpression | SQLExpression[];
   }
 
   /* --- aggregate types --- */
 
-  export namespace public {  
+  export namespace public {
     export type Table = categories.Table | products.Table | reviews.Table;
-    export type Selectable = categories.Selectable | products.Selectable | reviews.Selectable;
-    export type JSONSelectable = categories.JSONSelectable | products.JSONSelectable | reviews.JSONSelectable;
-    export type Whereable = categories.Whereable | products.Whereable | reviews.Whereable;
-    export type Insertable = categories.Insertable | products.Insertable | reviews.Insertable;
-    export type Updatable = categories.Updatable | products.Updatable | reviews.Updatable;
-    export type UniqueIndex = categories.UniqueIndex | products.UniqueIndex | reviews.UniqueIndex;
+    export type Selectable =
+      | categories.Selectable
+      | products.Selectable
+      | reviews.Selectable;
+    export type JSONSelectable =
+      | categories.JSONSelectable
+      | products.JSONSelectable
+      | reviews.JSONSelectable;
+    export type Whereable =
+      | categories.Whereable
+      | products.Whereable
+      | reviews.Whereable;
+    export type Insertable =
+      | categories.Insertable
+      | products.Insertable
+      | reviews.Insertable;
+    export type Updatable =
+      | categories.Updatable
+      | products.Updatable
+      | reviews.Updatable;
+    export type UniqueIndex =
+      | categories.UniqueIndex
+      | products.UniqueIndex
+      | reviews.UniqueIndex;
     export type Column = categories.Column | products.Column | reviews.Column;
-  
-    export type AllBaseTables = [categories.Table, products.Table, reviews.Table];
+
+    export type AllBaseTables = [
+      categories.Table,
+      products.Table,
+      reviews.Table
+    ];
     export type AllForeignTables = [];
     export type AllViews = [];
     export type AllMaterializedViews = [];
-    export type AllTablesAndViews = [categories.Table, products.Table, reviews.Table];
+    export type AllTablesAndViews = [
+      categories.Table,
+      products.Table,
+      reviews.Table
+    ];
   }
-
-
 
   /* === global aggregate types === */
 
@@ -611,55 +879,53 @@ declare module 'zapatos/schema' {
   export type AllMaterializedViews = [...public.AllMaterializedViews];
   export type AllTablesAndViews = [...public.AllTablesAndViews];
 
-
   /* === lookups === */
 
   export type SelectableForTable<T extends Table> = {
-    "categories": categories.Selectable;
-    "products": products.Selectable;
-    "reviews": reviews.Selectable;
+    categories: categories.Selectable;
+    products: products.Selectable;
+    reviews: reviews.Selectable;
   }[T];
 
   export type JSONSelectableForTable<T extends Table> = {
-    "categories": categories.JSONSelectable;
-    "products": products.JSONSelectable;
-    "reviews": reviews.JSONSelectable;
+    categories: categories.JSONSelectable;
+    products: products.JSONSelectable;
+    reviews: reviews.JSONSelectable;
   }[T];
 
   export type WhereableForTable<T extends Table> = {
-    "categories": categories.Whereable;
-    "products": products.Whereable;
-    "reviews": reviews.Whereable;
+    categories: categories.Whereable;
+    products: products.Whereable;
+    reviews: reviews.Whereable;
   }[T];
 
   export type InsertableForTable<T extends Table> = {
-    "categories": categories.Insertable;
-    "products": products.Insertable;
-    "reviews": reviews.Insertable;
+    categories: categories.Insertable;
+    products: products.Insertable;
+    reviews: reviews.Insertable;
   }[T];
 
   export type UpdatableForTable<T extends Table> = {
-    "categories": categories.Updatable;
-    "products": products.Updatable;
-    "reviews": reviews.Updatable;
+    categories: categories.Updatable;
+    products: products.Updatable;
+    reviews: reviews.Updatable;
   }[T];
 
   export type UniqueIndexForTable<T extends Table> = {
-    "categories": categories.UniqueIndex;
-    "products": products.UniqueIndex;
-    "reviews": reviews.UniqueIndex;
+    categories: categories.UniqueIndex;
+    products: products.UniqueIndex;
+    reviews: reviews.UniqueIndex;
   }[T];
 
   export type ColumnForTable<T extends Table> = {
-    "categories": categories.Column;
-    "products": products.Column;
-    "reviews": reviews.Column;
+    categories: categories.Column;
+    products: products.Column;
+    reviews: reviews.Column;
   }[T];
 
   export type SQLForTable<T extends Table> = {
-    "categories": categories.SQL;
-    "products": products.SQL;
-    "reviews": reviews.SQL;
+    categories: categories.SQL;
+    products: products.SQL;
+    reviews: reviews.SQL;
   }[T];
-
 }

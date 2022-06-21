@@ -39,6 +39,8 @@ export const Query: QueryResolvers = {
   },
   product: (_parent, args: QueryProductArgs, context: ApolloContext) => {
     const { id } = args;
+    console.log(id);
+
     return context.db.products.find((product: Product) => {
       return product.id === id;
     });

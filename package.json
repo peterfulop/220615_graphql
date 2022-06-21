@@ -15,7 +15,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^17.0.43",
     "@types/uuid": "^8.3.4",
     "apollo-server": "^3.8.2",
     "apollo-server-core": "^3.9.0",
@@ -37,11 +36,13 @@
     "zapatos": "^6.0.1"
   },
   "devDependencies": {
+    "typescript": "4.1.3",
     "@graphql-codegen/cli": "2.6.2",
     "@graphql-codegen/typescript": "2.5.1",
     "@graphql-codegen/typescript-resolvers": "^2.6.6",
     "@types/cls-hooked": "^4.3.3",
     "@types/convict": "^6.1.1",
+    "@types/node": "^18.0.0",
     "@types/pg": "^8.6.5",
     "sqlite3": "^5.0.8"
   }
