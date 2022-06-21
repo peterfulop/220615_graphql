@@ -18,7 +18,7 @@ export const reviewTypeDef = gql`
     title: String!
     comment: String!
     rating: Int!
-    productId: String
+    productId: String!
   }
 
   input CreateReviewInput {
@@ -34,5 +34,6 @@ export const reviewTypeDef = gql`
     title: String!
     comment: String!
     rating: Int!
+    productId: String!
   }
 `;

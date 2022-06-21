@@ -17,6 +17,8 @@ import { reviewGQLModuleFactory } from './graphql/review/review.module';
 import { CreateReviewUseCase } from './use-cases/review/create-review.use-case';
 import { GetReviewsUseCase } from './use-cases/review/get-reviews.use-case';
 import { GetReviewUseCase } from './use-cases/review/get-review.use-case';
+import { DeleteReviewUseCase } from './use-cases/review/delete-review.use.case';
+import { UpdateReviewUseCase } from './use-cases/review/update-review.use-case';
 export interface ApolloInstance {
   server: ApolloServer;
   schema: GraphQLSchema;
@@ -36,6 +38,8 @@ export const createApolloServer = ({
   getReviewsUseCase,
   getReviewUseCase,
   createReviewUseCase,
+  deleteReviewUseCase,
+  updapteReviewUseCase,
 }: {
   transactionService: TransactionService;
   getCategoryUseCase: GetCategoryUseCase;
@@ -46,6 +50,8 @@ export const createApolloServer = ({
   getReviewsUseCase: GetReviewsUseCase;
   getReviewUseCase: GetReviewUseCase;
   createReviewUseCase: CreateReviewUseCase;
+  deleteReviewUseCase: DeleteReviewUseCase;
+  updapteReviewUseCase: UpdateReviewUseCase;
 }): ApolloInstance => {
   const categoryGQLModule = categoryGQLModuleFactory({
     transactionService,
@@ -61,6 +67,8 @@ export const createApolloServer = ({
     getReviewsUseCase,
     getReviewUseCase,
     createReviewUseCase,
+    updapteReviewUseCase,
+    deleteReviewUseCase,
   });
 
   const schema = makeExecutableSchema({

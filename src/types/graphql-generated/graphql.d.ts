@@ -153,7 +153,7 @@ export type Review = {
   comment: Scalars['String'];
   date: Scalars['String'];
   id: Scalars['ID'];
-  productId?: Maybe<Scalars['String']>;
+  productId: Scalars['String'];
   rating: Scalars['Int'];
   title: Scalars['String'];
 };
@@ -180,6 +180,7 @@ export type UpdateProductInput = {
 export type UpdateReviewInput = {
   comment: Scalars['String'];
   date: Scalars['String'];
+  productId: Scalars['String'];
   rating: Scalars['Int'];
   title: Scalars['String'];
 };
@@ -341,7 +342,7 @@ export type ReviewResolvers<ContextType = any, ParentType extends ResolversParen
   comment?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   date?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  productId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  productId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   rating?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
