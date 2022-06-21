@@ -24,25 +24,24 @@ export const updateCategoryUseCaseFactory =
   ({ categoryRepo }: { categoryRepo: CategoryRepo }): UpdateCategoryUseCase =>
   async (input) => {
     const category = await categoryRepo.getByID(input.args.id);
-
     if (!category) {
       throw new NotFoundError(EEntity.CATEGORY);
     }
 
     const existsCategory = await categoryRepo.getCategoryByName(
-      input.args.input.name
+      input.args.options.name
     );
 
     if (existsCategory) {
       throw new DuplicationError(EEntity.CATEGORY, {
-        key: input.args.input.name,
-        value: input.args.input.name,
+        key: input.args.options.name,
+        value: input.args.options.name,
       });
     }
 
     const itemOptions = {
-      ...input.args.input,
-      name: input.args.input.name,
+      ...input.args.options,
+      name: input.args.options.name,
     };
     const itemId = input.args.id;
     return (await categoryRepo.updateByID(itemId, itemOptions))[0] as Category;
