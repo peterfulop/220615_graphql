@@ -20,7 +20,7 @@ export type CreateCategoryUseCase = AsyncUseCase<
   CreateCategoryOutput
 >;
 
-export const createItemUseCaseFactory =
+export const createCategoryUseCaseFactory =
   ({ categoryRepo }: { categoryRepo: CategoryRepo }): CreateCategoryUseCase =>
   async (input) => {
     const itemOptions = {

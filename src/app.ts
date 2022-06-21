@@ -8,6 +8,7 @@ import { sqlTransactionServiceFactory } from './framework/transaction/sql-transa
 import { categoryRepoFactory } from './repositories/category/category-repo';
 import { getCategoryUseCaseFactory } from './use-cases/category/get-category.use-case';
 import { getCategoriesUseCaseFactory } from './use-cases/category/get-categories.use-case';
+import { createCategoryUseCaseFactory } from './use-cases/category/create-category.use-case';
 export interface FastifyInstanceWithApolloServer extends FastifyInstance {
   apollo: ApolloInstance;
 }
@@ -19,10 +20,15 @@ export const createApp = async (): Promise<FastifyInstanceWithApolloServer> => {
 
   const categoryRepo = categoryRepoFactory(runFragment);
 
+  const getCategoriesUseCase = getCategoriesUseCaseFactory({
+    categoryRepo,
+  });
+
   const getCategoryUseCase = getCategoryUseCaseFactory({
     categoryRepo,
   });
-  const getCategoriesUseCase = getCategoriesUseCaseFactory({
+
+  const createCategoryUseCase = createCategoryUseCaseFactory({
     categoryRepo,
   });
 
@@ -30,6 +36,7 @@ export const createApp = async (): Promise<FastifyInstanceWithApolloServer> => {
     transactionService,
     getCategoryUseCase,
     getCategoriesUseCase,
+    createCategoryUseCase,
   });
 
   const fastifyApp = createFastifyApp({
