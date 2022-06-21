@@ -2,11 +2,9 @@ import { selectOne } from 'zapatos/db';
 import { zapatosBaseRepoFactory, ZapatosRepo } from '../base-repo';
 import type { RunFragment } from '../../framework/database/create-run-fragment';
 import type { JSONSelectableForTable, WhereableForTable } from 'zapatos/schema';
+
 type CategoryResource = 'categories';
 export const CategoryResource = 'categories' as const;
-
-type CategorySetStatusesResource = 'category_set_statuses';
-export const CategorySetStatusesResource = 'category_set_statuses' as const;
 
 export type CategoryRepo = ZapatosRepo<CategoryResource> & {
   getFull(

@@ -10,6 +10,7 @@ import { CreateCategoryUseCase } from './use-cases/category/create-category.use-
 import { BASE_TYPE_DEF } from './framework/graphql/base.schema';
 import { categoryTypeDef } from './graphql/category/category.schema';
 import { DeleteCategoryUseCase } from './use-cases/category/delete-category.use.case';
+import { UpdateCategoryUseCase } from './use-cases/category/update-category.use-case';
 export interface ApolloInstance {
   server: ApolloServer;
   schema: GraphQLSchema;
@@ -25,12 +26,14 @@ export const createApolloServer = ({
   getCategoriesUseCase,
   createCategoryUseCase,
   deleteCategoryUseCase,
+  updateCategoryUseCase,
 }: {
   transactionService: TransactionService;
   getCategoryUseCase: GetCategoryUseCase;
   getCategoriesUseCase: GetCategoriesUseCase;
   createCategoryUseCase: CreateCategoryUseCase;
   deleteCategoryUseCase: DeleteCategoryUseCase;
+  updateCategoryUseCase: UpdateCategoryUseCase;
 }): ApolloInstance => {
   const categoryGQLModule = categoryGQLModuleFactory({
     transactionService,
@@ -38,6 +41,7 @@ export const createApolloServer = ({
     getCategoriesUseCase,
     createCategoryUseCase,
     deleteCategoryUseCase,
+    updateCategoryUseCase,
   });
 
   const schema = makeExecutableSchema({

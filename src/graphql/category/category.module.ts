@@ -5,12 +5,14 @@ import { runInTransactionFactory } from '../../framework/transaction/run-in-tran
 import {
   MutationCreateCategoryArgs,
   MutationDeleteCategoryArgs,
+  MutationUpdateCategoryArgs,
   QueryCategoryArgs,
 } from '../../types/graphql-generated/graphql';
 import { ApolloContext } from '../../apollo';
 import { GetCategoriesUseCase } from '../../use-cases/category/get-categories.use-case';
 import { CreateCategoryUseCase } from '../../use-cases/category/create-category.use-case';
 import { DeleteCategoryUseCase } from '../../use-cases/category/delete-category.use.case';
+import { UpdateCategoryUseCase } from '../../use-cases/category/update-category.use-case';
 
 export const categoryGQLModuleFactory = ({
   transactionService,
@@ -18,12 +20,14 @@ export const categoryGQLModuleFactory = ({
   getCategoriesUseCase,
   createCategoryUseCase,
   deleteCategoryUseCase,
+  updateCategoryUseCase,
 }: {
   transactionService: TransactionService;
   getCategoryUseCase: GetCategoryUseCase;
   getCategoriesUseCase: GetCategoriesUseCase;
   createCategoryUseCase: CreateCategoryUseCase;
   deleteCategoryUseCase: DeleteCategoryUseCase;
+  updateCategoryUseCase: UpdateCategoryUseCase;
 }): IResolvers => {
   const transacting = runInTransactionFactory({ transactionService });
   return {
@@ -51,6 +55,13 @@ export const categoryGQLModuleFactory = ({
           args: MutationDeleteCategoryArgs,
           context: ApolloContext
         ) => await deleteCategoryUseCase({ args, context })
+      ),
+      updateCategory: transacting(
+        async (
+          _source,
+          args: MutationUpdateCategoryArgs,
+          context: ApolloContext
+        ) => await updateCategoryUseCase({ args, context })
       ),
     },
   };
