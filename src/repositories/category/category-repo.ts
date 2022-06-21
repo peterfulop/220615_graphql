@@ -7,9 +7,6 @@ type CategoryResource = 'categories';
 export const CategoryResource = 'categories' as const;
 
 export type CategoryRepo = ZapatosRepo<CategoryResource> & {
-  getFull(
-    itemId: string
-  ): Promise<JSONSelectableForTable<CategoryResource> | null>;
   getCategoryByName: (
     name: string
   ) => Promise<JSONSelectableForTable<CategoryResource> | null>;
@@ -19,15 +16,6 @@ export const categoryRepoFactory = (runFragment: RunFragment): CategoryRepo => {
   const baseRepo = zapatosBaseRepoFactory(CategoryResource, runFragment);
   return {
     ...baseRepo,
-    getFull: async (itemId) => {
-      const item = await baseRepo.getByID(itemId);
-      if (item === null) {
-        return null;
-      }
-      return {
-        ...item,
-      };
-    },
     getCategoryByName: async (name) => {
       return (
         (await runFragment(
