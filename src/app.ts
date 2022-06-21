@@ -9,6 +9,7 @@ import { categoryRepoFactory } from './repositories/category/category-repo';
 import { getCategoryUseCaseFactory } from './use-cases/category/get-category.use-case';
 import { getCategoriesUseCaseFactory } from './use-cases/category/get-categories.use-case';
 import { createCategoryUseCaseFactory } from './use-cases/category/create-category.use-case';
+import { deleteCategoryUseCaseFactory } from './use-cases/category/delete-category.use.case';
 export interface FastifyInstanceWithApolloServer extends FastifyInstance {
   apollo: ApolloInstance;
 }
@@ -32,11 +33,16 @@ export const createApp = async (): Promise<FastifyInstanceWithApolloServer> => {
     categoryRepo,
   });
 
+  const deleteCategoryUseCase = deleteCategoryUseCaseFactory({
+    categoryRepo,
+  });
+
   const apolloServer = createApolloServer({
     transactionService,
     getCategoryUseCase,
     getCategoriesUseCase,
     createCategoryUseCase,
+    deleteCategoryUseCase,
   });
 
   const fastifyApp = createFastifyApp({

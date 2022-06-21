@@ -1,13 +1,13 @@
 import { gql } from 'apollo-server';
 
 export const categoryTypeDef = gql`
-  extends type Query {
-    categories: [Category!]
+  extend type Query {
+    categories: [Category]
     category(id: ID!): Category
   }
 
   type Mutation {
-    createCategory(options: AddCategoryInput!): Category
+    createCategory(options: CreateCategoryInput!): Category
     deleteCategory(id: ID!): Boolean
     updateCategory(id: ID!, input: UpdateCategoryInput!): Category
   }
@@ -17,7 +17,7 @@ export const categoryTypeDef = gql`
     name: String!
   }
 
-  input AddCategoryInput {
+  input CreateCategoryInput {
     name: String!
   }
 

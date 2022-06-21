@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:apollo": "ts-node-dev ./src/server.ts",
-    "start:worker": "ts-node --require dotenv/config src/worker.ts dotenv_config_path=./.env",
+    "start:worker": "ts-node-dev --require dotenv/config src/worker.ts dotenv_config_path=./.env",
     "codegen:zapatos": "ts-node src/framework/database/zapatos.ts",
     "codegen:gql": "graphql-codegen --config codegen.yml",
     "knex": "ts-node node_modules/.bin/knex --knexfile src/framework/database/knexfile.ts",

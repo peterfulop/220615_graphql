@@ -3,13 +3,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 import type {
   Category,
-  MutationAddCategoryArgs,
+  MutationCreateCategoryArgs,
 } from '../../types/graphql-generated/graphql';
 import type { AsyncUseCase } from '../../framework/use-case/use-case';
 import type { CategoryRepo } from '../../repositories/category/category-repo';
 
 export type CreateCategoryInput = {
-  args: MutationAddCategoryArgs;
+  args: MutationCreateCategoryArgs;
   context: ApolloContext;
 };
 
@@ -25,8 +25,8 @@ export const createCategoryUseCaseFactory =
   async (input) => {
     const itemOptions = {
       id: uuidv4(),
-      name: input.args.input.name,
+      name: input.args.options.name,
     };
     await categoryRepo.add(itemOptions);
-    return { ...input.args } as unknown as Category;
+    return { ...itemOptions } as unknown as Category;
   };
