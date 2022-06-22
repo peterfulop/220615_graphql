@@ -3,7 +3,7 @@ import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
 import fastify from 'fastify';
 import { db } from './data/data';
 import { productGQLModule } from './graphql/product.module';
-import { productTypeDef } from './graphql/category/category.schema';
+import { productTypeDef } from './graphql/product.schema';
 
 const app = fastify();
 const server = new ApolloServer({
