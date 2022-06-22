@@ -2,8 +2,8 @@ import { gql } from 'apollo-server';
 
 export const productTypeDef = gql`
   extend type Query {
-    products: [Category]
-    product(id: ID!): Category
+    products: [Product]
+    product(id: ID!): Product
   }
 
   type Mutation {

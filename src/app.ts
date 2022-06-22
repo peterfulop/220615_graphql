@@ -17,6 +17,12 @@ import { createReviewUseCaseFactory } from './use-cases/review/create-review.use
 import { getReviewUseCaseFactory } from './use-cases/review/get-review.use-case';
 import { deleteReviewUseCaseFactory } from './use-cases/review/delete-review.use.case';
 import { updateReviewUseCaseFactory } from './use-cases/review/update-review.use-case';
+import { createProductUseCaseFactory } from './use-cases/product/create-product.use-case';
+import { deleteProductUseCaseFactory } from './use-cases/product/delete-product.use.case';
+import { getProductUseCaseFactory } from './use-cases/product/get-product.use-case';
+import { getProductsUseCaseFactory } from './use-cases/product/get-products.use-case';
+import { updateProductUseCaseFactory } from './use-cases/product/update-product.use-case';
+import { productRepoFactory } from './repositories/product/product-repo';
 export interface FastifyInstanceWithApolloServer extends FastifyInstance {
   apollo: ApolloInstance;
 }
@@ -28,6 +34,7 @@ export const createApp = async (): Promise<FastifyInstanceWithApolloServer> => {
 
   const categoryRepo = categoryRepoFactory(runFragment);
   const reviewRepo = reviewRepoFactory(runFragment);
+  const productRepo = productRepoFactory(runFragment);
 
   const getCategoriesUseCase = getCategoriesUseCaseFactory({
     categoryRepo,
@@ -43,6 +50,22 @@ export const createApp = async (): Promise<FastifyInstanceWithApolloServer> => {
   });
   const updateCategoryUseCase = updateCategoryUseCaseFactory({
     categoryRepo,
+  });
+
+  const getProductsUseCase = getProductsUseCaseFactory({
+    productRepo,
+  });
+  const getProductUseCase = getProductUseCaseFactory({
+    productRepo,
+  });
+  const createProductUseCase = createProductUseCaseFactory({
+    productRepo,
+  });
+  const deleteProductUseCase = deleteProductUseCaseFactory({
+    productRepo,
+  });
+  const updapteProductUseCase = updateProductUseCaseFactory({
+    productRepo,
   });
 
   const getReviewsUseCase = getReviewsUseCaseFactory({
@@ -68,6 +91,11 @@ export const createApp = async (): Promise<FastifyInstanceWithApolloServer> => {
     createCategoryUseCase,
     deleteCategoryUseCase,
     updateCategoryUseCase,
+    getProductsUseCase,
+    getProductUseCase,
+    createProductUseCase,
+    deleteProductUseCase,
+    updapteProductUseCase,
     getReviewsUseCase,
     getReviewUseCase,
     createReviewUseCase,

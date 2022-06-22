@@ -25,7 +25,7 @@ export const updateReviewUseCaseFactory =
   async (input) => {
     const Review = await reviewRepo.getByID(input.args.id);
     if (!Review) {
-      throw new NotFoundError(EEntity.CATEGORY);
+      throw new NotFoundError(EEntity.REVIEW);
     }
     const itemOptions = {
       ...input.args.options,

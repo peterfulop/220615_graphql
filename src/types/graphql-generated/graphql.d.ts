@@ -127,8 +127,8 @@ export type Query = {
   _?: Maybe<Scalars['Boolean']>;
   categories?: Maybe<Array<Maybe<Category>>>;
   category?: Maybe<Category>;
-  product?: Maybe<Category>;
-  products?: Maybe<Array<Maybe<Category>>>;
+  product?: Maybe<Product>;
+  products?: Maybe<Array<Maybe<Product>>>;
   review?: Maybe<Review>;
   reviews?: Maybe<Array<Maybe<Review>>>;
 };
@@ -332,8 +332,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   _?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   categories?: Resolver<Maybe<Array<Maybe<ResolversTypes['Category']>>>, ParentType, ContextType>;
   category?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, RequireFields<QueryCategoryArgs, 'id'>>;
-  product?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
-  products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Category']>>>, ParentType, ContextType>;
+  product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
+  products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType>;
   review?: Resolver<Maybe<ResolversTypes['Review']>, ParentType, ContextType, RequireFields<QueryReviewArgs, 'id'>>;
   reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
 };

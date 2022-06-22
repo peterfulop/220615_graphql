@@ -19,6 +19,12 @@ import { GetReviewsUseCase } from './use-cases/review/get-reviews.use-case';
 import { GetReviewUseCase } from './use-cases/review/get-review.use-case';
 import { DeleteReviewUseCase } from './use-cases/review/delete-review.use.case';
 import { UpdateReviewUseCase } from './use-cases/review/update-review.use-case';
+import { CreateProductUseCase } from './use-cases/product/create-product.use-case';
+import { DeleteProductUseCase } from './use-cases/product/delete-product.use.case';
+import { GetProductUseCase } from './use-cases/product/get-product.use-case';
+import { GetProductsUseCase } from './use-cases/product/get-products.use-case';
+import { UpdateProductUseCase } from './use-cases/product/update-product.use-case';
+import { productGQLModuleFactory } from './graphql/product/product.module';
 export interface ApolloInstance {
   server: ApolloServer;
   schema: GraphQLSchema;
@@ -35,6 +41,11 @@ export const createApolloServer = ({
   createCategoryUseCase,
   deleteCategoryUseCase,
   updateCategoryUseCase,
+  getProductsUseCase,
+  getProductUseCase,
+  createProductUseCase,
+  deleteProductUseCase,
+  updapteProductUseCase,
   getReviewsUseCase,
   getReviewUseCase,
   createReviewUseCase,
@@ -47,6 +58,11 @@ export const createApolloServer = ({
   createCategoryUseCase: CreateCategoryUseCase;
   deleteCategoryUseCase: DeleteCategoryUseCase;
   updateCategoryUseCase: UpdateCategoryUseCase;
+  getProductsUseCase: GetProductsUseCase;
+  getProductUseCase: GetProductUseCase;
+  createProductUseCase: CreateProductUseCase;
+  updapteProductUseCase: UpdateProductUseCase;
+  deleteProductUseCase: DeleteProductUseCase;
   getReviewsUseCase: GetReviewsUseCase;
   getReviewUseCase: GetReviewUseCase;
   createReviewUseCase: CreateReviewUseCase;
@@ -62,6 +78,15 @@ export const createApolloServer = ({
     updateCategoryUseCase,
   });
 
+  const productGQLModule = productGQLModuleFactory({
+    transactionService,
+    getProductsUseCase,
+    getProductUseCase,
+    createProductUseCase,
+    updapteProductUseCase,
+    deleteProductUseCase,
+  });
+
   const reviewGQLModule = reviewGQLModuleFactory({
     transactionService,
     getReviewsUseCase,
@@ -73,7 +98,7 @@ export const createApolloServer = ({
 
   const schema = makeExecutableSchema({
     typeDefs: [BASE_TYPE_DEF, categoryTypeDef, reviewTypeDef, productTypeDef],
-    resolvers: [categoryGQLModule, reviewGQLModule],
+    resolvers: [categoryGQLModule, productGQLModule, reviewGQLModule],
   });
 
   return {
