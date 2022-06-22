@@ -21,7 +21,8 @@ export const productTypeDef = gql`
     price: Float!
     onSale: Boolean!
     category: Category
-    reviews: [Review!]!
+    reviews: [Review!]
+    categoryId: String!
   }
 
   input ProductsFilterInput {
