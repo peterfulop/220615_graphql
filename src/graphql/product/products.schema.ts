@@ -20,8 +20,6 @@ export const productTypeDef = gql`
     image: String!
     price: Float!
     onSale: Boolean!
-    category: Category
-    reviews: [Review!]
     categoryId: String!
   }
 

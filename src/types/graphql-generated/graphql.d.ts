@@ -106,7 +106,6 @@ export type MutationUpdateReviewArgs = {
 
 export type Product = {
   __typename?: 'Product';
-  category?: Maybe<Category>;
   categoryId: Scalars['String'];
   description: Scalars['String'];
   id: Scalars['ID'];
@@ -115,7 +114,6 @@ export type Product = {
   onSale: Scalars['Boolean'];
   price: Scalars['Float'];
   quantity: Scalars['Int'];
-  reviews?: Maybe<Array<Review>>;
 };
 
 export type ProductsFilterInput = {
@@ -317,7 +315,6 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
-  category?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType>;
   categoryId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -326,7 +323,6 @@ export type ProductResolvers<ContextType = any, ParentType extends ResolversPare
   onSale?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  reviews?: Resolver<Maybe<Array<ResolversTypes['Review']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
