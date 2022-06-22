@@ -8,9 +8,9 @@ export type GetReviewsInput = {
   context: ApolloContext;
 };
 
-export type GetReviewOutput = Review[];
+export type GetReviewsOutput = Review[];
 
-export type GetReviewsUseCase = AsyncUseCase<GetReviewsInput, GetReviewOutput>;
+export type GetReviewsUseCase = AsyncUseCase<GetReviewsInput, GetReviewsOutput>;
 
 export const getReviewsUseCaseFactory =
   ({ reviewRepo }: { reviewRepo: ReviewRepo }): GetReviewsUseCase =>
