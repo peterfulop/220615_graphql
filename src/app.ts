@@ -23,6 +23,7 @@ import { getProductUseCaseFactory } from './use-cases/product/get-product.use-ca
 import { getProductsUseCaseFactory } from './use-cases/product/get-products.use-case';
 import { updateProductUseCaseFactory } from './use-cases/product/update-product.use-case';
 import { productRepoFactory } from './repositories/product/product-repo';
+import { getReviewsByProductUseCaseFactory } from './use-cases/review/get-reviews-by-product.use-case';
 export interface FastifyInstanceWithApolloServer extends FastifyInstance {
   apollo: ApolloInstance;
 }
@@ -83,6 +84,9 @@ export const createApp = async (): Promise<FastifyInstanceWithApolloServer> => {
   const updapteReviewUseCase = updateReviewUseCaseFactory({
     reviewRepo,
   });
+  const getReviewsByProductUseCase = getReviewsByProductUseCaseFactory({
+    reviewRepo,
+  });
 
   const apolloServer = createApolloServer({
     transactionService,
@@ -101,6 +105,7 @@ export const createApp = async (): Promise<FastifyInstanceWithApolloServer> => {
     createReviewUseCase,
     deleteReviewUseCase,
     updapteReviewUseCase,
+    getReviewsByProductUseCase,
   });
 
   const fastifyApp = createFastifyApp({

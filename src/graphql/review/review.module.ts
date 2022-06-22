@@ -13,6 +13,7 @@ import {
 import { CreateReviewUseCase } from '../../use-cases/review/create-review.use-case';
 import { DeleteReviewUseCase } from '../../use-cases/review/delete-review.use.case';
 import { UpdateReviewUseCase } from '../../use-cases/review/update-review.use-case';
+import { GetReviewsByProductUseCase } from '../../use-cases/review/get-reviews-by-product.use-case';
 
 export const reviewGQLModuleFactory = ({
   transactionService,
@@ -21,6 +22,7 @@ export const reviewGQLModuleFactory = ({
   createReviewUseCase,
   updapteReviewUseCase,
   deleteReviewUseCase,
+  getReviewsByProductUseCase,
 }: {
   transactionService: TransactionService;
   getReviewsUseCase: GetReviewsUseCase;
@@ -28,6 +30,7 @@ export const reviewGQLModuleFactory = ({
   createReviewUseCase: CreateReviewUseCase;
   updapteReviewUseCase: UpdateReviewUseCase;
   deleteReviewUseCase: DeleteReviewUseCase;
+  getReviewsByProductUseCase: GetReviewsByProductUseCase;
 }): IResolvers => {
   const transacting = runInTransactionFactory({ transactionService });
   return {
@@ -39,6 +42,10 @@ export const reviewGQLModuleFactory = ({
       reviews: transacting(
         async (_source, args: QueryReviewArgs, context: ApolloContext) =>
           await getReviewsUseCase({ args, context })
+      ),
+      reviewsByProduct: transacting(
+        async (_source, args: QueryReviewArgs, context: ApolloContext) =>
+          await getReviewsByProductUseCase({ args, context })
       ),
     },
     Mutation: {

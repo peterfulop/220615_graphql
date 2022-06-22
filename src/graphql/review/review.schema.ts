@@ -4,6 +4,7 @@ export const reviewTypeDef = gql`
   extend type Query {
     reviews: [Review]
     review(id: ID!): Review
+    reviewsByProduct(id: ID!): ReviewsByProducts
   }
 
   type Mutation {
@@ -19,6 +20,11 @@ export const reviewTypeDef = gql`
     comment: String!
     rating: Int!
     productId: String!
+  }
+
+  type ReviewsByProducts {
+    items: [Review]!
+    count: Int!
   }
 
   input CreateReviewInput {

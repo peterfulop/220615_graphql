@@ -130,6 +130,7 @@ export type Query = {
   products?: Maybe<Array<Maybe<Product>>>;
   review?: Maybe<Review>;
   reviews?: Maybe<Array<Maybe<Review>>>;
+  reviewsByProduct?: Maybe<ReviewsByProducts>;
 };
 
 
@@ -155,6 +156,12 @@ export type Review = {
   productId: Scalars['String'];
   rating: Scalars['Int'];
   title: Scalars['String'];
+};
+
+export type ReviewsByProducts = {
+  __typename?: 'ReviewsByProducts';
+  count: Scalars['Int'];
+  items: Array<Maybe<Review>>;
 };
 
 export type Subscription = {
@@ -266,6 +273,7 @@ export type ResolversTypes = {
   ProductsFilterInput: ProductsFilterInput;
   Query: ResolverTypeWrapper<{}>;
   Review: ResolverTypeWrapper<Review>;
+  ReviewsByProducts: ResolverTypeWrapper<ReviewsByProducts>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Subscription: ResolverTypeWrapper<{}>;
   UpdateCategoryInput: UpdateCategoryInput;
@@ -288,6 +296,7 @@ export type ResolversParentTypes = {
   ProductsFilterInput: ProductsFilterInput;
   Query: {};
   Review: Review;
+  ReviewsByProducts: ReviewsByProducts;
   String: Scalars['String'];
   Subscription: {};
   UpdateCategoryInput: UpdateCategoryInput;
@@ -334,6 +343,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType>;
   review?: Resolver<Maybe<ResolversTypes['Review']>, ParentType, ContextType, RequireFields<QueryReviewArgs, 'id'>>;
   reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
+  reviewsByProduct?: Resolver<Maybe<ResolversTypes['ReviewsByProducts']>, ParentType, ContextType>;
 };
 
 export type ReviewResolvers<ContextType = any, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = {
@@ -343,6 +353,12 @@ export type ReviewResolvers<ContextType = any, ParentType extends ResolversParen
   productId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   rating?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ReviewsByProductsResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReviewsByProducts'] = ResolversParentTypes['ReviewsByProducts']> = {
+  count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  items?: Resolver<Array<Maybe<ResolversTypes['Review']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -356,6 +372,7 @@ export type Resolvers<ContextType = any> = {
   Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Review?: ReviewResolvers<ContextType>;
+  ReviewsByProducts?: ReviewsByProductsResolvers<ContextType>;
   Subscription?: SubscriptionResolvers<ContextType>;
 };
 
