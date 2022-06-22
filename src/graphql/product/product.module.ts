@@ -37,8 +37,8 @@ export const productGQLModuleFactory = ({
           await getProductUseCase({ args, context })
       ),
       products: transacting(
-        async (_source, args: QueryProductArgs, context: ApolloContext) =>
-          await getProductsUseCase({ args, context })
+        async (source, args: QueryProductArgs, context: ApolloContext) =>
+          await getProductsUseCase({ source, args, context })
       ),
     },
     Mutation: {

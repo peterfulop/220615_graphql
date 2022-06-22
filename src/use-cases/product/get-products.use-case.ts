@@ -7,20 +7,22 @@ import {
 } from '../../types/graphql-generated/graphql';
 
 export type GetProductsInput = {
+  source: any;
   args: QueryProductArgs;
   context: ApolloContext;
 };
 
-export type GetProductOutput = Product[];
+export type GetProductsOutput = Product[];
 
 export type GetProductsUseCase = AsyncUseCase<
   GetProductsInput,
-  GetProductOutput
+  GetProductsOutput
 >;
 
 export const getProductsUseCaseFactory =
   ({ productRepo }: { productRepo: ProductRepo }): GetProductsUseCase =>
-  async () => {
+  async (input) => {
+    console.log(input.source);
     const item = (await productRepo.getAll()) as unknown as Product[];
     return item;
   };
