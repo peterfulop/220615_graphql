@@ -1,6 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
 import { GraphQLSchema } from 'graphql';
-import { db } from './data/data';
 import { ApolloServer } from 'apollo-server-fastify';
 import { GetCategoryUseCase } from './use-cases/category/get-category.use-case';
 import { GetCategoriesUseCase } from './use-cases/category/get-categories.use-case';
@@ -30,9 +29,7 @@ export interface ApolloInstance {
   schema: GraphQLSchema;
 }
 
-export type ApolloContext = {
-  db: any;
-};
+export type ApolloContext = {};
 
 export const createApolloServer = ({
   transactionService,
@@ -104,7 +101,7 @@ export const createApolloServer = ({
   return {
     server: new ApolloServer({
       context: async (): Promise<ApolloContext> => {
-        return db as any;
+        return {};
       },
       schema,
     }),
